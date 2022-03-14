@@ -3,6 +3,7 @@ Bash
 
 <!--ts-->
   * [Process commands](#process-commands)
+  * [Search directories](#search-directories)
   * [Substrings](#substrings)
   * [Regular expressions](#regular-expressions)
   * [References](#references)
@@ -15,6 +16,18 @@ Find process full command. [Taken from here](https://unix.stackexchange.com/ques
 ```
 process_full_command=$(ps -p [PID] -o args)
 echo $process_full_command
+```
+
+Search directories
+===
+```
+find . \
+     -path "./.config/dir1" -prune -o \
+     -name ".test" -prune -o \
+     -type f -print0 |
+  xargs -0 grep -io pattern
+
+grep -R -i <pattern> --exclude-dir="dir1" --exclude-dir="dir2"
 ```
 
 Substrings
