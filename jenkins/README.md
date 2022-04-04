@@ -17,3 +17,4 @@ Jenkins.instance.getItemByFullName("job_name").getBuildByNumber(build_number).fi
 Links
 ====
 * [Jenkins zombie process](https://stackoverflow.com/questions/14456592/how-to-stop-an-unstoppable-zombie-job-on-jenkins-without-restarting-the-server/38481808#38481808)
+* [Jenkins simulations](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.wrapper.WrapperContext.colorizeOutput)
