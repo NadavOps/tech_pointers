@@ -79,13 +79,14 @@ git add --patch <filename>
 Git tag
 ====
 ```
-git tag                           --> lists the tags
-git tag tag_name                  --> simple tag which points stright to a commit.
-git tag -a tag_name -m "msg"      --> anotative tag which points to a tag object containing metadata which points to a commit.
-git tag -d tag_name               --> deletes local tag
-git push --delete origin tag_name --> delete remote tag
-git push origin tag_name          --> push local tag to remote
-git push origin --tags            --> push all local tags to remote
+git tag                                                --> lists the tags
+git tag tag_name                                       --> simple tag which points stright to a commit.
+git tag -a tag_name -m "msg"                           --> anotative tag which points to a tag object containing metadata which points to a commit.
+git tag -d tag_name                                    --> deletes local tag
+git push --delete origin tag_name                      --> delete remote tag
+git push --delete origin $(git tag -l "some-pattern*") --> delete pattern tags from remote
+git push origin tag_name                               --> push local tag to remote
+git push origin --tags                                 --> push all local tags to remote
 ```
 
 Git rm
