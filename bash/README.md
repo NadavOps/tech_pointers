@@ -1,25 +1,23 @@
-Bash
-===========
+# Bash
 
-<!--ts-->
-  * [Process commands](#process-commands)
-  * [Search directories](#search-directories)
-  * [Substrings](#substrings)
-  * [Regular expressions](#regular-expressions)
-  * [References](#references)
-  * [Links](#links)
-<!--te-->
+### Table of Content
+* [Process commands](#process-commands)
+* [Search directories](#search-directories)
+* [Substrings](#substrings)
+* [Regular expressions](#regular-expressions)
+* [References](#references)
+* [Links](#links)
 
-Process commands
-====
+## Process commands
+
 Find process full command. [Taken from here](https://unix.stackexchange.com/questions/163145/how-to-get-whole-command-line-from-a-process).
 ```
 process_full_command=$(ps -p [PID] -o args)
 echo $process_full_command
 ```
 
-Search directories
-===
+## Search directories
+
 ```
 find . \
      -path "./.config/dir1" -prune -o \
@@ -30,16 +28,16 @@ find . \
 grep -R -i <pattern> --exclude-dir="dir1" --exclude-dir="dir2"
 ```
 
-Substrings
-====
+## Substrings
+
 ```
 # Taken from https://github.com/bobbyiliev/introduction-to-bash-scripting/blob/main/ebook/en/content/008-bash-arrays.md
 letters=( "A""B""C""D""E" ) 
 echo "${letters:2:3}"  --> returns CDE
 ```
 
-Regular expressions
-===
+## Regular expressions
+
 ```
 ## Expressions
 [:alnum:]  --> all alphanumeric characters (upper+lower+digits)
@@ -54,8 +52,8 @@ Regular expressions
 sed 's/[^[:upper:] ,.]//g'  --> removes all the characters that are not (upper whitespace comma or dot)
 ```
 
-References
-===
+## References
+
 ```
 $?    --> last command status code
 $#    --> number of provided arguments
@@ -66,8 +64,8 @@ $$    --> the running process PID
 $EUID --> Current userID (root user ID is 0)
 ```
 
-Links
-====
+## Links
+
 * [ShellCheck locally](https://github.com/koalaman/shellcheck)
 * [jq manual](https://stedolan.github.io/jq/manual/)
 * [Quiz API- to create a fun quiz tool](https://quizapi.io/docs/1.0/overview)

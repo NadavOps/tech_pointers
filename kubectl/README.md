@@ -1,18 +1,16 @@
-Bash
-===========
+# kubectl
 
-<!--ts-->
-  * [Links](#links)
-  * [Logs](#logs)
-<!--te-->
+### Table of Content
+* [Links](#links)
+* [Logs](#logs)
 
-Logs
-====
+## Logs
+
 ```
 kubectl logs --timestamps --tail 200 -f <pod_name> --> adding timestamps, listens on stdout, and print last 200 lines
 ```
 
-Links
-====
+## Links
+
 * [Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/).
 * [Commands](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).

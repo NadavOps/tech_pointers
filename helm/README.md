@@ -1,14 +1,12 @@
-Bash
-===========
+# Helm
 
-<!--ts-->
-  * [Examples](#examples)
-  * [13 Best Practices for using Helm](#13-best-practices-for-using-helm)
-  * [Links](#links)
-<!--te-->
+### Table of Content
+* [Examples](#examples)
+* [13 Best Practices for using Helm](#13-best-practices-for-using-helm)
+* [Links](#links)
 
-Examples
-====
+## Examples
+
 * Defining variables
 * Compare operator
 * Built-in Functions -> fail with printf inside of it
@@ -21,14 +19,14 @@ Examples
 {{- end -}}
 ```
 
-13 Best Practices for using Helm
-====
+## 13 Best Practices for using Helm
+
 * [13 Best Practices for using Helm](https://codersociety.com/blog/articles/helm-best-practices).
   * [Subcharts](https://codersociety.com/blog/articles/helm-best-practices#2-use-subcharts-to-manage-your-dependencies).
   * [Resource deletion protection](https://codersociety.com/blog/articles/helm-best-practices#9-opt-out-of-resource-deletion-with-resource-policies).
 
-Links
-====
+## Links
+
 * [13 Best Practices for using Helm](https://codersociety.com/blog/articles/helm-best-practices).
 * [Go template language](https://pkg.go.dev/text/template)
   * [Helm template cheat sheet](https://lzone.de/cheat-sheet/Helm%20Templates)

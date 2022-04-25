@@ -1,17 +1,15 @@
-Bash
-===========
+# Chrome
 
-<!--ts-->
-  * [Settings](#settings)
-  * [Links](#links)
-<!--te-->
+### Table of Content
+* [Settings](#settings)
+* [Links](#links)
 
-Settings
-====
+## Settings
+
 ```
 chrome://flags/ --> can save tab groups from there -> takes hold on bookmarks
 ```
 
-Links
-====
+## Links
+
 * []()

@@ -1,17 +1,15 @@
-Bash
-===========
+# Python
 
-<!--ts-->
-  * [Script Console](#script-console)
-  * [Links](#links)
-<!--te-->
+### Table of Content
+* [Script Console](#script-console)
+* [Links](#links)
 
-Script Console
-====
+## Script Console
+
 ```
 tracemalloc to debug memory leak (see allocations)
 objgraph to debug memory leak (find reference -> holding the object consuming memory)
 ```
 
-Links
-====
+## Links
+

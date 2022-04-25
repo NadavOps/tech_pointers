@@ -1,27 +1,25 @@
-Git
-===========
+# Git
 
-<!--ts-->
-  * [Git commands](#git-commands)
-    * [Git config](#git-config)
-    * [Git diff](#git-diff)
-    * [Git log show and blame](#git-log-show-and-blame)
-    * [Git add](#git-add)
-    * [Git tag](#git-tag)
-    * [Git rm](#git-rm)
-    * [Git reset](#git-reset)
-    * [Git revert](#git-revert)
-    * [Git stash](#git-stash)
-    * [Changing history](#changing-history)
-    * [Git refs](#git-refs)
-    * [Git plumbing tools](#git-plumbing-tools)
-  * [Links](#links)
-<!--te-->
+### Table of Content
+* [Git commands](#git-commands)
+  * [Git config](#git-config)
+  * [Git diff](#git-diff)
+  * [Git log show and blame](#git-log-show-and-blame)
+  * [Git add](#git-add)
+  * [Git tag](#git-tag)
+  * [Git rm](#git-rm)
+  * [Git reset](#git-reset)
+  * [Git revert](#git-revert)
+  * [Git stash](#git-stash)
+  * [Changing history](#changing-history)
+  * [Git refs](#git-refs)
+  * [Git plumbing tools](#git-plumbing-tools)
+* [Links](#links)
 
-Git commands
-===
-Git config
-====
+## Git commands
+
+## Git config
+
 ```
 # set the user name and email
 git config --global user.name "FIRST_NAME LAST_NAME"
@@ -39,8 +37,8 @@ git remote set-url origin new.git.url/here
 git config --global alias.co checkout
 ```
 
-Git diff
-====
+## Git diff
+
 ```
 ## git diff checks the difference between the working area and the staging area
 ## --cached checks the difference between the staging area and the current pointed commit
@@ -50,8 +48,8 @@ git diff <unstaged_file>
 git diff <branch_name> <branch_name2>
 ```
 
-Git log show and blame
-===
+## Git log show and blame
+
 ```
 git log --graph --decorate --oneline --> cleaner and add info :O
 git log --patch --> see the changes in the commits
@@ -69,15 +67,15 @@ git show HEAD~2^2 --> details over the 2nd commit of the 2nd parent commit of he
 git show HEAD@{"1 month ago"} --> details over the parent commit of HEAD one month ago
 ```
 
-Git add
-====
+## Git add
+
 ```
 ## interactive add for certain "hunks" in a file
 git add --patch <filename>
 ```
 
-Git tag
-====
+## Git tag
+
 ```
 git tag                                                --> lists the tags
 git tag tag_name                                       --> simple tag which points stright to a commit.
@@ -89,8 +87,8 @@ git push origin tag_name                               --> push local tag to rem
 git push origin --tags                                 --> push all local tags to remote
 ```
 
-Git rm
-====
+## Git rm
+
 ```
 ## to remove a file from the staging area but maintain the content
 git rm --cached
@@ -98,8 +96,8 @@ git rm --cached
 git rm -f
 ```
 
-Git reset
-===
+## Git reset
+
 ```
 # taken from https://stackoverflow.com/questions/2845731/how-to-uncommit-my-last-commit-in-git
 # the ^ character means the commit before, in our case the commit before the HEAD (can use hash commit instead)
@@ -114,14 +112,14 @@ git reset <commit-hash-before-the-bad-one>
 git reset --hard
 ```
 
-Git revert
-===
+## Git revert
+
 ```
 git revert <commit_hash> --> creats a new commit of the opposite changes that were dont in the referenced commit
 ```
 
-Git stash
-====
+## Git stash
+
 ```
 ## without untracked files
 git stash
@@ -131,8 +129,8 @@ git stash apply
 git stash clear
 ```
 
-Changing history
-===
+## Changing history
+
 ```
 git log; to find the desired commit
 git rebase -i HEAD~3
@@ -146,8 +144,8 @@ change the pick word (:%s/FindMe/ReplaceME/g)
 git commit --amend --> to change latest commit
 ```
 
-Git refs
-====
+## Git refs
+
 ```
 # can help recover dangling commits that about to be garbaged collected
 git show-ref <branch_name> --> Will show "branch names" of the remote and local and on what they are pointing
@@ -155,8 +153,8 @@ git reflog HEAD --> shows history of the HEAD pointer over the commits
 git reflog refs/heads/master --> shows history of the master pointer over the commits
 ```
 
-Git plumbing tools
-===
+## Git plumbing tools
+
 ```
 ## "filter-repo" is the new command that will take over "filter-branch"
 git filter-repo --path <filename> --> destroys all files but "filename" from all commits
@@ -168,8 +166,8 @@ git cat-file <commit_hash> -t --> the type behind the commit_hash
 git cat-file <commit_hash> -p --> prints the value of the commit_hash
 ```
 
-Links
-====
+## Links
+
 * [Set multiple ssh keys for multiple github accounts](https://gist.github.com/jexchan/2351996).
 * [Changing history](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase).
 * [Code academy git course](https://www.codecademy.com/learn/learn-git)

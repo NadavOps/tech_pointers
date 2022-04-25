@@ -1,17 +1,14 @@
-ELK
-===========
+# Elasticsearch
 
-<!--ts-->
-  * [Elasticsearch curl requests](#elasticsearch-curl-requests)
-  * [Elasticsearch security](#elasticsearch-security)
-  * [Elasticsearch node roles by character](#elasticsearch-node-roles-by-character)
-  * [Elasticsearch snapshot status](#elasticsearch-snapshot-status)
-  * [Links](#links)
-<!--te-->
+### Table of Content
+* [Elasticsearch curl requests](#elasticsearch-curl-requests)
+* [Elasticsearch security](#elasticsearch-security)
+* [Elasticsearch node roles by character](#elasticsearch-node-roles-by-character)
+* [Elasticsearch snapshot status](#elasticsearch-snapshot-status)
+* [Links](#links)
 
+## Elasticsearch curl requests
 
-Elasticsearch curl requests
-====
 ```
 # Set ENV
 ELASTICSEARCH_FQDN=""
@@ -40,8 +37,8 @@ curl -X DELETE "$ELASTICSEARCH_FQDN:9200/index_name?pretty"
 ```
 
 
-Elasticsearch security
-===
+## Elasticsearch security
+
 ```
 # Elasticsearch certs
 ./bin/elasticsearch-certutil ca
@@ -58,8 +55,8 @@ echo 'elasticsearch.username: "kibana_system"' >> kibana.yml
 ```
 
 
-Elasticsearch node roles by character
-====
+## Elasticsearch node roles by character
+
 ```
 c - cold node
 d - data node
@@ -77,8 +74,8 @@ w - warm node
 ```
 
 
-Elasticsearch snapshot status
-===
+## Elasticsearch snapshot status
+
 ```
 _snapshot/_status
 _snapshot/<repo_name>
@@ -87,8 +84,8 @@ _snapshot/<repo_name>/<snapshot_name>
 _snapshot/<repo_name>/<snapshot_name>/_status
 ```
 
-Elasticsearch bulk index close
-===
+## Elasticsearch bulk index close
+
 ```
 ELASTICSEARCH_FQDN=
 IGNORE_INDEX=
@@ -101,8 +98,8 @@ done
 ```
 
 
-Links
-====
+## Links
+
 * [Elastic node roles](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-nodes.html).
 * [Elastic roles list](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/security-privileges.html).
 * [asd](https://www.codecademy.com/learn/learn-git)
