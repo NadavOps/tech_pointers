@@ -5,6 +5,7 @@
 * [Elasticsearch security](#elasticsearch-security)
 * [Elasticsearch node roles by character](#elasticsearch-node-roles-by-character)
 * [Elasticsearch snapshot status](#elasticsearch-snapshot-status)
+* [Elasticsearch rolling restart](#elasticsearch-rolling-restart)
 * [Links](#links)
 
 ## Elasticsearch curl requests
@@ -84,6 +85,7 @@ _snapshot/<repo_name>/<snapshot_name>
 _snapshot/<repo_name>/<snapshot_name>/_status
 ```
 
+
 ## Elasticsearch bulk index close
 
 ```
@@ -97,6 +99,58 @@ for es_index in $(curl -s "$ELASTICSEARCH_FQDN:9200/_cat/indices?v" | awk '{prin
 done
 ```
 
+
+## Elasticsearch rolling restart
+* Allow shard allocation only for primaries:
+```
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": "primaries"
+  }
+}
+```
+
+* Flush:
+```
+POST /_flush
+```
+
+* Restart node and see that it joins with:
+```
+GET _cat/nodes  -> curl -s -u $es_user:$es_pass $es_fqdn:9200/_cat/nodes
+```
+
+* Allow all shard allocations:
+```
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": "all"
+  }
+}
+```
+
+Consider using the following:  
+* Delay shard allocation on node leave:
+```
+PUT _all/_settings
+{
+  "settings": {
+    "index.unassigned.node_left.delayed_timeout": "10m"
+  }
+}
+```
+
+* Revert back shard allocation delay on node leave:
+```
+PUT _all/_settings
+{
+  "settings": {
+    "index.unassigned.node_left.delayed_timeout": "1m"
+  }
+}
+```
 
 ## Links
 
