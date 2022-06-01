@@ -12,6 +12,11 @@ if [[ -z "$new_size" ]]; then
     exit 1
 fi
 
+if [[ ! $new_size =~ ^[0-9]+$ ]]; then
+    bash_logging ERROR "2nd parameter \"new_size\" must be an integer"
+    exit 1
+fi
+
 if kubectl get sts "$statefulset_name" &> /dev/null; then
     bash_logging INFO "\"$statefulset_name\" was found, continue"
 else
