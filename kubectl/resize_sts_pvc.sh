@@ -12,6 +12,13 @@ if [[ -z "$new_size" ]]; then
     exit 1
 fi
 
+if kubectl get sts "$statefulset_name" &> /dev/null; then
+    bash_logging INFO "\"$statefulset_name\" was found, continue"
+else
+    bash_logging ERROR "\"$statefulset_name\" was not found, re-enter a valid statefulset_name"
+    exit 1
+fi
+
 pvcs=$(kubectl get pvc | grep "$statefulset_name" | awk '{print $1}')
 bash_logging INFO "PVCs that will be checked for resizing"
 for pvc in $pvcs; do
