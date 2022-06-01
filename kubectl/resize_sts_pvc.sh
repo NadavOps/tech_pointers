@@ -53,6 +53,11 @@ for pvc in $pvcs; do
     verified_pvcs+=("$pvc")
 done
 
+if [[ -z "$verified_pvcs" ]]; then
+    bash_logging ERROR "No PVCS were found to be resized, check params/ script output to further investigate"
+    exit 1
+fi
+
 bash_logging INFO "PVCs that were verified for resizing"
 for pvc in "${verified_pvcs[@]}"
 do
