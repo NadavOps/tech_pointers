@@ -79,6 +79,6 @@ do
     pvc_size_number=$(echo $pvc_size_raw | sed 's/[a-zA-Z]//g')
     pvc_new_size_raw=$new_size
     pvc_new_size_raw+=$(echo $pvc_size_raw | sed 's/[0-9]//g')
-    bash_logging DEBUG "patching pvc: \"$pvc\" from pvc_size_raw \"pvc_size_raw\" to \"pvc_new_size_raw\""
+    bash_logging DEBUG "patching pvc: \"$pvc\" from pvc_size_raw \"$pvc_size_raw\" to \"$pvc_new_size_raw\""
     kubectl patch -p '{"spec": {"resources": {"requests": {"storage": "'$pvc_new_size_raw'"}}}}' pvc $pvc
 done
