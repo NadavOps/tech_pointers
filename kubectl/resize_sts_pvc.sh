@@ -1,7 +1,7 @@
 #!/bin/bash
 source ~/.shellrc.d/bash_logging.sh
 statefulset_name="$1"
-new_size="$2"
+new_size="$2" ## pay attention this script does not handle the cases where we increase from one unit to another, EG -> Mi to Gi
 if [[ -z "$statefulset_name" ]]; then
     bash_logging ERROR "pass a statefulset_name as the 1st param to identify its pvcs and resize them"
     exit 1
@@ -15,7 +15,7 @@ fi
 pvcs=$(kubectl get pvc | grep "$statefulset_name" | awk '{print $1}')
 bash_logging INFO "PVCs that will be checked for resizing"
 for pvc in $pvcs; do
-    bash_logging INFO $pvc
+    bash_logging INFO "$pvc"
 done
 
 for pvc in $pvcs; do
@@ -44,7 +44,7 @@ done
 bash_logging INFO "PVCs that were verified for resizing"
 for pvc in "${verified_pvcs[@]}"
 do
-     bash_logging INFO $pvc
+     bash_logging INFO "$pvc"
 done
 
 bash_logging WARN """Are you sure you want to run the following?
