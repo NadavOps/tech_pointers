@@ -67,7 +67,7 @@ done
 bash_logging WARN """Are you sure you want to run the following?
                               kubectl delete sts --cascade=false $statefulset_name
                               later on patch the PVCs with size of $new_size
-                              press enter if you do or CTRL+C to cancel"""
+                              press any key if you do or CTRL+C to cancel"""
 read
 bash_logging WARN "running kubectl delete sts --cascade=false $statefulset_name"
 kubectl delete sts --cascade=false $statefulset_name
@@ -76,7 +76,6 @@ bash_logging INFO "Patching verified PVCs with new size"
 for pvc in "${verified_pvcs[@]}"
 do
     pvc_size_raw=$(kubectl get -o jsonpath='{.spec.resources.requests.storage}' pvc $pvc)
-    pvc_size_number=$(echo $pvc_size_raw | sed 's/[a-zA-Z]//g')
     pvc_new_size_raw=$new_size
     pvc_new_size_raw+=$(echo $pvc_size_raw | sed 's/[0-9]//g')
     bash_logging DEBUG "patching pvc: \"$pvc\" from pvc_size_raw \"$pvc_size_raw\" to \"$pvc_new_size_raw\""
