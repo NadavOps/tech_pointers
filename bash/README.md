@@ -3,6 +3,7 @@
 ### Table of Content
 * [Process commands](#process-commands)
 * [Search directories](#search-directories)
+  * [Get highest disk space direcotories](#get-highest-disk-space-direcotories)
 * [Substrings](#substrings)
 * [Regular expressions](#regular-expressions)
 * [References](#references)
@@ -26,6 +27,18 @@ find . \
   xargs -0 grep -io pattern
 
 grep -R -i <pattern> --exclude-dir="dir1" --exclude-dir="dir2"
+```
+
+## Get highest disk space direcotories
+
+```
+# Taken from https://unix.stackexchange.com/questions/125429/tracking-down-where-disk-space-has-gone-on-linux
+du -Pshx /* 2>/dev/null
+
+-s --> summarizes the total
+-h --> prints in scale units (GB, MB, ...)
+-x --> searches on one filesystem
+-P --> dont follow symlinks to avoid duplication
 ```
 
 ## Substrings
