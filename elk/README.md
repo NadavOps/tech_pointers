@@ -77,6 +77,8 @@ done
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cat/nodes?v"
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cat/nodes?v&h=node.role"
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cat/nodes?v=true&h=name,node*,heap*"
+curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_nodes/hot_threads"
+  curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_nodes/hot_threads?threads=99999"
 ```
 
 ## Shards APIs
@@ -194,3 +196,12 @@ w - warm node
 * [Elastic fix common cluster issues](https://www.elastic.co/guide/en/elasticsearch//reference/master/fix-common-cluster-issues.html#high-jvm-memory-pressure).
 * [Elastic Diagnose unassigned shards](https://www.elastic.co/guide/en/elasticsearch//reference/master/diagnose-unassigned-shards.html).
 * [Elasticsearch cheat sheet by logzio](https://logz.io/blog/elasticsearch-cheat-sheet/).
+* [Elasticsearch threadpool by opster](https://opster.com/guides/elasticsearch/glossary/elasticsearch-threadpool/).
+* [Elasticsearch threadpool by opster2](https://opster.com/guides/elasticsearch/glossary/elasticsearch-queue/).
+
+* [Queue debugging in options by elastic developer in a forum](https://discuss.elastic.co/t/rejected-execution-queue-capacity-1000/89954).
+
+* [Hot Threads](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-hot-threads.html).
+  * [Hot Threads article explanation](https://cdmana.com/2020/11/20201112225049974p.html)
+
+* [Slow log explanation](https://www.elastic.co/blog/advanced-tuning-finding-and-fixing-slow-elasticsearch-queries)
