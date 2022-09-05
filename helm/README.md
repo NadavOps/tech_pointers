@@ -1,12 +1,15 @@
 # Helm
 
 ### Table of Content
+* [Commands](#commands)
 * [Examples](#examples)
 * [13 Best Practices for using Helm](#13-best-practices-for-using-helm)
 * [Links](#links)
 
-## Examples
+## Commands
+helm search repo <reponame>/<chartname> --versions     --> show available version for a chart
 
+## Examples
 * Defining variables
 * Compare operator
 * Built-in Functions -> fail with printf inside of it
@@ -20,13 +23,11 @@
 ```
 
 ## 13 Best Practices for using Helm
-
 * [13 Best Practices for using Helm](https://codersociety.com/blog/articles/helm-best-practices).
   * [Subcharts](https://codersociety.com/blog/articles/helm-best-practices#2-use-subcharts-to-manage-your-dependencies).
   * [Resource deletion protection](https://codersociety.com/blog/articles/helm-best-practices#9-opt-out-of-resource-deletion-with-resource-policies).
 
 ## Links
-
 * [13 Best Practices for using Helm](https://codersociety.com/blog/articles/helm-best-practices).
 * [Go template language](https://pkg.go.dev/text/template)
   * [Helm template cheat sheet](https://lzone.de/cheat-sheet/Helm%20Templates)
