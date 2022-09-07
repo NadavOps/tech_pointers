@@ -5,7 +5,9 @@
   * [Indices APIs](#indices-apis)
   * [Nodes APIs](#nodes-apis)
   * [Shards APIs](#shards-apis)
-  * [Snapshot APIs](#snapshot-apis)
+  * [Snapshots Repositories and Restore](#snapshots-repositories-and-restore)
+    * [Repositories APIs](#repositories-apis)
+    * [Snapshot APIs](#snapshot-apis)
 * [Elasticsearch Operations](#elasticsearch-operations)
   * [Rolling restart](#rolling-restart)
   * [Basic security configuration](#basic-security-configuration)
@@ -102,13 +104,33 @@ curl -X PUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQ
   -d'{"transient": {"cluster.routing.allocation.cluster_concurrent_rebalance": 2}}'
 ```
 
+## Snapshots Repositories and Restore
+## Repositories APIs
+```
+curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cat/repositories?v"
+```
+
 ## Snapshot APIs
 ```
+curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cat/snapshots/<repo_name>?v=true&s=id&pretty"
+
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_snapshot/_status"
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_snapshot/<repo_name>"
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_snapshot/<repo_name>/_current"
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_snapshot/<repo_name>/<snapshot_name>"
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_snapshot/<repo_name>/<snapshot_name>/_status"
+
+curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_snapshot/<repo_name>?pretty" -H 'Content-Type: application/json' -d'
+{
+  "type": "s3",
+  "settings": {
+    "bucket": "<bucket_name>",
+    "client": "default",
+    "base_path": "",
+    "readonly": true
+  }
+}
+'
 ```
 
 
