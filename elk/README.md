@@ -8,6 +8,7 @@
   * [Snapshots Repositories and Restore](#snapshots-repositories-and-restore)
     * [Repositories APIs](#repositories-apis)
     * [Snapshot APIs](#snapshot-apis)
+    * [Recovery APIs](#recovery-apis)
 * [Elasticsearch Operations](#elasticsearch-operations)
   * [Rolling restart](#rolling-restart)
   * [Basic security configuration](#basic-security-configuration)
@@ -131,6 +132,11 @@ curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQD
   }
 }
 '
+```
+
+## Recovery APIs
+```
+curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cat/recovery"
 ```
 
 
