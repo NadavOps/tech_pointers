@@ -104,7 +104,7 @@ git rm -f
 git reset --soft HEAD^  -> uncommit
 git reset HEAD^ -> Unstage
 git reset --hard HEAD^ -> destroy work done
-git checkout HEAD <file_name> -> destroys work done on a specific file
+git checkout HEAD -- <file_name> -> destroys work done on a specific file (hard reset)
 
 # taken from https://stackoverflow.com/questions/7099833/how-to-revert-a-merge-commit-thats-already-pushed-to-remote-branch
 git checkout your_branch_name
