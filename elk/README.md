@@ -12,6 +12,8 @@
 * [Elasticsearch Operations](#elasticsearch-operations)
   * [Rolling restart](#rolling-restart)
   * [Basic security configuration](#basic-security-configuration)
+* [Elasticsearch known issues](#elasticsearch-known-issues)
+  * [Elasticsearch read only mode](#elasticsearch-read-only-mode)
 * [Elasticsearch node roles by character](#elasticsearch-node-roles-by-character)
 * [Links](#links)
 
@@ -198,6 +200,17 @@ echo 'elasticsearch.username: "kibana_system"' >> kibana.yml
 ./bin/kibana-keystore add elasticsearch.password
 ```
 
+## Elasticsearch known issues
+## Elasticsearch read only mode
+```
+## Validate status
+curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_all/_settings" | jq . | grep "read_only_allow_delete"
+
+## Allow write again
+curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_all/_settings" \
+  -H "Content-Type: application/json" \
+  -d '{"index.blocks.read_only_allow_delete": null}'
+```
 
 ## Elasticsearch node roles by character
 
