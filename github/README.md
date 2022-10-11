@@ -61,6 +61,21 @@ for workflow_id in $(curl -s \
 done
 ```
 
+```
+gh_owner_name=""
+gh_repo_name=""
+gh_token=""
+workflow_filename=""
+branch_name=""
+
+curl -s \
+  -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $gh_token" \
+  "https://api.github.com/repos/$gh_owner_name/$gh_repo_name/actions/workflows/$workflow_filename/dispatches" \
+  -d '{"ref":"'$branch_name'","inputs":{"name":"Mona the Octocat","home":"San Francisco, CA"}}'
+```
+
 ## Links
 
 * [Set multiple ssh keys for multiple github accounts](https://gist.github.com/jexchan/2351996).
