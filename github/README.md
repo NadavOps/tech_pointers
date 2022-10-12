@@ -11,8 +11,9 @@
 ## Rest APIs
 
 ## Workflows
-Get OIDC JWT token to output for debugging purposes
+
 ```
+# Get OIDC JWT token to output for debugging purposes
       - name: Dump JWT
         run: |
           IDTOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com"|jq -r ".|.value")
@@ -63,6 +64,7 @@ done
 ```
 
 ```
+## Dispatch/ trigger a workflow
 gh_owner_name=""
 gh_repo_name=""
 gh_token=""
