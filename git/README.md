@@ -3,6 +3,7 @@
 ### Table of Content
 * [Git commands](#git-commands)
   * [Git config](#git-config)
+  * [Git branch](#git-branch)
   * [Git diff](#git-diff)
   * [Git log show and blame](#git-log-show-and-blame)
   * [Git add](#git-add)
@@ -21,6 +22,9 @@
 ## Git config
 
 ```
+# show configuration
+git config --list
+
 # set the user name and email
 git config --global user.name "FIRST_NAME LAST_NAME"
 git config --global user.email "MY_NAME@example.com"
@@ -35,6 +39,13 @@ git remote set-url origin new.git.url/here
 ```
 # set git aliases
 git config --global alias.co checkout
+```
+
+## Git branch
+
+```
+git branch
+git branch -r --> list branches at remote (--remote)
 ```
 
 ## Git diff
