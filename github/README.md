@@ -1,4 +1,4 @@
-# Git
+# Github
 
 ### Table of Content
 * [Github actions](#git-actions)
