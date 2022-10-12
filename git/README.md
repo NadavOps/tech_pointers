@@ -45,7 +45,8 @@ git config --global alias.co checkout
 
 ```
 git branch
-git branch -r --> list branches at remote (--remote)
+git branch -r                --> list branches at remote (--remote)
+git branch -d <branch_name>  --> deletes a branch locally
 ```
 
 ## Git diff
