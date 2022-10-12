@@ -4,6 +4,7 @@
 * [Github actions](#git-actions)
   * [Rest APIs](#rest-apis)
   * [Workflows](#workflows)
+  * [Useful built in env vars](#useful-built-in-env-vars)
 * [Links](#links)
 
 ## Github actions
@@ -74,6 +75,15 @@ curl -s \
   -H "Authorization: Bearer $gh_token" \
   "https://api.github.com/repos/$gh_owner_name/$gh_repo_name/actions/workflows/$workflow_filename/dispatches" \
   -d '{"ref":"'$branch_name'","inputs":{"name":"Mona the Octocat","home":"San Francisco, CA"}}'
+```
+
+## Useful built in env vars
+```
+$GITHUB_EVENT_PATH -> path to a local run file with the event information
+$GITHUB_TRIGGERING_ACTOR -> the one triggered the action
+  to set him in git we can use the following:
+     git config user.email "${GITHUB_TRIGGERING_ACTOR}@users.noreply.github.com"
+     git config user.name "$GITHUB_TRIGGERING_ACTOR"
 ```
 
 ## Links
