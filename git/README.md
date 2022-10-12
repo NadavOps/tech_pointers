@@ -162,6 +162,8 @@ git commit --amend --> to change latest commit
 git show-ref <branch_name> --> Will show "branch names" of the remote and local and on what they are pointing
 git reflog HEAD --> shows history of the HEAD pointer over the commits
 git reflog refs/heads/master --> shows history of the master pointer over the commits
+git ls-tree
+git ls-remote
 ```
 
 ## Git plumbing tools
