@@ -86,6 +86,14 @@ $GITHUB_TRIGGERING_ACTOR -> the one triggered the action
   to set him in git we can use the following:
      git config user.email "${GITHUB_TRIGGERING_ACTOR}@users.noreply.github.com"
      git config user.name "$GITHUB_TRIGGERING_ACTOR"
+$GITHUB_CONTEXT -> context of the run
+  can be set like so:
+    env: 
+      GITHUB_CONTEXT: ${{ toJson(github) }}
+    steps:
+      - name: Git github context
+        run: |
+          echo context: $GITHUB_CONTEXT
 ```
 
 ## Links
