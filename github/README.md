@@ -102,6 +102,7 @@ $GITHUB_CONTEXT -> context of the run
 * [Good oidc sketch for github actions](https://blog.codecentric.de/secretless-connections-from-github-actions-to-aws-using-oidc).
 * [Github actions tips for triggers and more](https://yonatankra.com/7-github-actions-tricks-i-wish-i-knew-before-i-started/).
 * [differences between composite action and reuseable workflow](https://dev.to/n3wt0n/composite-actions-vs-reusable-workflows-what-is-the-difference-github-actions-11kd#:%7E:text=With%20Reusable%20workflows%20you%20have,if%20it%20contains%20multiple%20steps.)
+* [Helped me understand how to share multiple actions](https://dev.to/robmulpeter/getting-started-with-github-action-workflows-3ehn)
 
 composite actions:
 https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
