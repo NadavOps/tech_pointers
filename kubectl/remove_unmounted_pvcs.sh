@@ -6,7 +6,7 @@ if [[ -z "$pattern" ]]; then
     exit 1
 fi
 
-pvcs=$(kubectl get pvc | grep "$pattern" | awk '{print $1}')
+pvcs=$(kubectl get pvc | grep -e "$pattern" | awk '{print $1}')
 bash_logging WARN "PVCs that will be checked for deletion"
 for pvc in $pvcs; do
     bash_logging WARN $pvc
