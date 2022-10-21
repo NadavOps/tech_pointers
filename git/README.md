@@ -7,14 +7,20 @@
   * [Git diff](#git-diff)
   * [Git log show and blame](#git-log-show-and-blame)
   * [Git add](#git-add)
+  * [Git push](#git-push)
   * [Git tag](#git-tag)
   * [Git rm](#git-rm)
   * [Git reset](#git-reset)
   * [Git revert](#git-revert)
   * [Git stash](#git-stash)
-  * [Changing history](#changing-history)
+  * [Git remote](#git-remote)
+  * [Git Rebase](#git-rebase)
   * [Git refs](#git-refs)
   * [Git plumbing tools](#git-plumbing-tools)
+
+* [Examples](#examples)
+  * [Changing history](#changing-history)
+
 * [Links](#links)
 
 ## Git commands
@@ -32,10 +38,7 @@ git config --global user.email "MY_NAME@example.com"
 git config --local user.name "FIRST_NAME LAST_NAME"
 git config --local user.email "MY_NAME@example.com"
 ```
-```
-# set the remote origin URL
-git remote set-url origin new.git.url/here
-```
+
 ```
 # set git aliases
 git config --global alias.co checkout
@@ -46,7 +49,10 @@ git config --global alias.co checkout
 ```
 git branch
 git branch -r                --> list branches at remote (--remote)
+git branch -a                --> see all branches, seems like list remote branches
+git branch -vv               --> shows branch refs
 git branch -d <branch_name>  --> deletes a branch locally
+git branch -D <branch_name>  --> deletes a branch
 ```
 
 ## Git diff
@@ -85,6 +91,13 @@ git show HEAD@{"1 month ago"} --> details over the parent commit of HEAD one mon
 ## interactive add for certain "hunks" in a file
 git add --patch <filename>
 ```
+
+## Git push
+git push origin branch_name              -> Pushes a local branch to the origin remote. 
+git push –u remote branch_name           -> there is semantics between this and the one above, not sure what yet 
+git push -u origin master                -> push changes to origin from local master 
+git push remote --delete branch_name     -> deletes a remote branch 
+
 
 ## Git tag
 
@@ -141,19 +154,20 @@ git stash apply
 git stash clear
 ```
 
-## Changing history
+## Git remote
+```
+git remote set-url origin new.git.url/here     --> set the remote origin URL
+git remote add origin <GitHub repo link>       --> linking the initialized git working directory with the repo in GitHub 
+git remote set-url origin <GitHub repo link>   --> change the repo link 
+git remote rm origin                           --> remove the current link 
+git remote -v                                  --> lists the remotes 
+```
+
+## Git rebase
 
 ```
-git log; to find the desired commit
-git rebase -i HEAD~3
+git pull –rebase origin master
 git rebase -i <commit hash>
-change the pick word (:%s/FindMe/ReplaceME/g)
-    s to squash
-    edit to overall change
-        while in edit it is possible to run:
-        git commit --amend --author="Author user_name <email_address_include_brackets>"
-
-git commit --amend --> to change latest commit
 ```
 
 ## Git refs
@@ -180,6 +194,21 @@ git cat-file <commit_hash> -t --> the type behind the commit_hash
 git cat-file <commit_hash> -p --> prints the value of the commit_hash
 ```
 
+## Examples
+## Changing history
+```
+git log; to find the desired commit
+git rebase -i HEAD~3
+git rebase -i <commit hash>
+change the pick word (:%s/FindMe/ReplaceME/g)
+    s to squash
+    edit to overall change
+        while in edit it is possible to run:
+        git commit --amend --author="Author user_name <email_address_include_brackets>"
+
+git commit --amend --> to change latest commit
+```
+
 ## Links
 
 * [Set multiple ssh keys for multiple github accounts](https://gist.github.com/jexchan/2351996).
@@ -187,3 +216,4 @@ git cat-file <commit_hash> -p --> prints the value of the commit_hash
 * [Code academy git course](https://www.codecademy.com/learn/learn-git)
 * [Github CLI](https://cli.github.com/manual/)
 * [Set github profile as a social page](https://github.com/bobbyiliev/introduction-to-git-and-github-ebook/blob/main/ebook/en/content/997-create-your-github-profile.md)
+* [Need to see how to sign commits and be verified](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
