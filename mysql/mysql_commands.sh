@@ -42,6 +42,7 @@ SHOW TRIGGERS in schema_name;
 DROP TRIGGER schema_name.trigger_name;
 
 # Interactive mysql commands from shell:
+mysql -h $MYSQL_HOST -P $MYSQL_HOST_PORT -u $MYSQL_USER -p$MYSQL_PASS -e "command"
 mysql -h $MYSQL_HOST -P $MYSQL_HOST_PORT -u $MYSQL_USER -p$MYSQL_PASS < sql_script_file.sql
 mysql -h $MYSQL_HOST -P $MYSQL_HOST_PORT -u $MYSQL_USER -p$MYSQL_PASS < sql_script_file.sql > csv_file.csv
 
