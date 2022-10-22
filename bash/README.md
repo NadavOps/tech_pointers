@@ -29,6 +29,11 @@ find . \
 grep -R -i <pattern> --exclude-dir="dir1" --exclude-dir="dir2"
 ```
 
+```
+find /path -type d -exec chmod 750 {} \;
+find /path -type f -exec chmod 640 {} \;
+```
+
 ## Get highest disk space direcotories
 
 ```
