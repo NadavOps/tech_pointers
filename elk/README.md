@@ -12,6 +12,7 @@
 * [Elasticsearch Operations](#elasticsearch-operations)
   * [Rolling restart](#rolling-restart)
   * [Basic security configuration](#basic-security-configuration)
+  * [Exclude nodes](#exclude-nodes)
 * [Elasticsearch known issues](#elasticsearch-known-issues)
   * [Elasticsearch read only mode](#elasticsearch-read-only-mode)
 * [Elasticsearch node roles by character](#elasticsearch-node-roles-by-character)
@@ -198,6 +199,19 @@ cd /usr/share/elasticsearch # different distributions differnt paths -> set | gr
 echo 'elasticsearch.username: "kibana_system"' >> kibana.yml
 ./bin/kibana-keystore create
 ./bin/kibana-keystore add elasticsearch.password
+```
+
+## Exclude nodes
+```
+curl -X PUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cluster/settings" \
+  -H 'Content-Type: application/json' \
+  -d'{"persistent": {"cluster.routing.allocation.exclude._name": ["node1", "node2"]}}'
+
+curl -X PUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cluster/settings" \
+  -H 'Content-Type: application/json' \
+  -d'{"persistent": {"cluster.routing.allocation.exclude._name": ""}}'
+
+curl -X GET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cluster/settings" | jq .
 ```
 
 ## Elasticsearch known issues
