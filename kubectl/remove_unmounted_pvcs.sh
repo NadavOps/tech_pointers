@@ -10,11 +10,15 @@ pvcs=$(kubectl get pvc | grep -e "$pattern" | awk '{print $1}')
 bash_logging WARN "PVCs that will be checked for deletion"
 for pvc in $pvcs; do
     bash_logging WARN $pvc
+    unverified_pvcs+=("$pvc")
 done
+
+bash_logging INFO "To delete pvcs without validation just run the command:"
+bash_logging WARN "kubectl delete pvc ${unverified_pvcs[*]}"
 
 for pvc in $pvcs; do
     bash_logging DEBUG "Evaluating pvc: \"$pvc\""
-    if kubectl describe pvc $pvc | grep "Mounted By:" | grep "<none>" &>/dev/null; then 
+    if kubectl describe pvc $pvc | grep "Used By:" | grep "<none>" &>/dev/null; then 
         bash_logging DEBUG "PVC is not mounted, added for deletion"
         verified_pvcs+=("$pvc")
     else
