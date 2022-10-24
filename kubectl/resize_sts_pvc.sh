@@ -32,7 +32,7 @@ done
 
 for pvc in $pvcs; do
     bash_logging DEBUG "Evaluating pvc: \"$pvc\""
-    mounting_pod=$(kubectl describe pvc $pvc | grep 'Mounted By:' | awk '{print $3}')
+    mounting_pod=$(kubectl describe pvc $pvc | grep 'Used By:' | awk '{print $3}')  ## Mount By: for older versions of k8s
     verified_sts=$(kubectl get -o jsonpath='{.metadata.ownerReferences[0].name}' pod $mounting_pod)
     if [[ "$verified_sts" != "$statefulset_name" ]]; then
         bash_logging ERROR "PVC: \"$pvc\" is not related to STS: \"$statefulset_name\", moving to next PVC"
@@ -65,12 +65,13 @@ do
 done
 
 bash_logging WARN """Are you sure you want to run the following?
-                              kubectl delete sts --cascade=false $statefulset_name
+                              kubectl delete sts --cascade=orphan $statefulset_name
                               later on patch the PVCs with size of $new_size
                               press any key if you do or CTRL+C to cancel"""
 read
-bash_logging WARN "running kubectl delete sts --cascade=false $statefulset_name"
-kubectl delete sts --cascade=false $statefulset_name
+
+bash_logging WARN "running kubectl delete sts --cascade=orphan $statefulset_name"
+kubectl delete sts --cascade=orphan "$statefulset_name" # For older k8s versions: kubectl delete sts --cascade=false "$statefulset_name"
 
 bash_logging INFO "Patching verified PVCs with new size"
 for pvc in "${verified_pvcs[@]}"
