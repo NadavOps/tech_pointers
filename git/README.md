@@ -14,12 +14,13 @@
   * [Git revert](#git-revert)
   * [Git stash](#git-stash)
   * [Git remote](#git-remote)
-  * [Git Rebase](#git-rebase)
+  * [Git rebase](#git-rebase)
   * [Git refs](#git-refs)
   * [Git plumbing tools](#git-plumbing-tools)
 
 * [Examples](#examples)
   * [Changing history](#changing-history)
+  * [Rebase master to feature branch](#rebase-master-to-feature-branch)
 
 * [Links](#links)
 
@@ -166,8 +167,7 @@ git remote -v                                  --> lists the remotes
 ## Git rebase
 
 ```
-git pull –rebase origin master
-git rebase -i <commit hash>
+git rebase -i <commit hash>    --> interactive rebase
 ```
 
 ## Git refs
@@ -208,6 +208,19 @@ change the pick word (:%s/FindMe/ReplaceME/g)
 
 git commit --amend --> to change latest commit
 ```
+## Rebase master to feature branch
+```
+# based on this https://www.verdantfox.com/blog/view/how-to-git-rebase-mainmaster-onto-your-feature-branch-even-with-merge-conflicts
+git checkout feature_branch  --> go to the feature branch
+git fetch origin             --> syncs main branch with latest changes
+git rebase origin/main       --> rebase the main branch, change to master if required
+**fix conflicts and then
+git add                      --> add file
+git rebase --continue        --> continue with rebase
+git rebase --skip            --> continue like this if git complains no changes were done after resolving conflict
+git push                     --> push changes, force if needed
+```
+
 
 ## Links
 
