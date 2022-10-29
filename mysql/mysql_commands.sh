@@ -49,3 +49,7 @@ mysql -h $MYSQL_HOST -P $MYSQL_HOST_PORT -u $MYSQL_USER -p$MYSQL_PASS < sql_scri
 # Assumption1 -> show locking processes?
 show variables like 'innodb_lock_wait_timeout';
 SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST WHERE COMMAND = "Sleep" AND TIME > 60;
+
+#### Other queries
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'table_name'
+Select max(id) from schema_name.table_name

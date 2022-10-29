@@ -103,6 +103,10 @@ $GITHUB_CONTEXT -> context of the run
 * [Github actions tips for triggers and more](https://yonatankra.com/7-github-actions-tricks-i-wish-i-knew-before-i-started/).
 * [differences between composite action and reuseable workflow](https://dev.to/n3wt0n/composite-actions-vs-reusable-workflows-what-is-the-difference-github-actions-11kd#:%7E:text=With%20Reusable%20workflows%20you%20have,if%20it%20contains%20multiple%20steps.)
 * [Helped me understand how to share multiple actions](https://dev.to/robmulpeter/getting-started-with-github-action-workflows-3ehn)
+* Mail and gpg
+  * [gpg](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key?platform=mac)
+  * [set noreply email](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address)
+  * [ssh signing](https://dev.to/li/correctly-telling-git-about-your-ssh-key-for-signing-commits-4c2c)
 
 composite actions:
 https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
