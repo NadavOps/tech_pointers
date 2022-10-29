@@ -1,11 +1,21 @@
 # Github
 
 ### Table of Content
-* [Github actions](#git-actions)
+* [Github keys](#github-keys)
+* [Github actions](#github-actions)
   * [Rest APIs](#rest-apis)
   * [Workflows](#workflows)
   * [Useful built in env vars](#useful-built-in-env-vars)
 * [Links](#links)
+
+## Github keys
+```
+ssh-keygen -t rsa -b 4096
+git config --global user.signingkey ~/.ssh/key_name.pub
+git config --global gpg.format ssh
+git config --global commit.gpgsign true
+git config --global tag.gpgsign true
+```
 
 ## Github actions
 ## Rest APIs
