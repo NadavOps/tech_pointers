@@ -55,6 +55,9 @@ curl -X DELETE -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]' ->> list of all indices
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]' | grep -v -e "^[.].*" ->> list indices with exclusion
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/<index_name>/_search" ->> return search hits that match the query
+curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" \
+    "$ELASTICSEARCH_FQDN:9200/_index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream"
+    -->> list index templates
 ```
 
 Get indices amount of primaries and replication factor:
@@ -66,7 +69,7 @@ for index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$EL
 done
 ```
 
-Bulk indices close:
+Bulk indices close v1:
 ```
 ELASTICSEARCH_FQDN=
 IGNORE_INDEX=
@@ -75,6 +78,22 @@ for es_index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "
     continue
   fi
   curl -X POST -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/$es_index/_close?pretty"
+done
+```
+
+Bulk indices close v2:
+```
+for es_index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]' | grep -v -e "^[.].*"); do
+  echo $es_index
+  curl -X POST -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/$es_index/_close?pretty"
+done
+```
+
+Bulk indices delete:
+```
+for es_index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]' | grep -v -e "^[.].*"); do
+  echo $es_index
+  curl -X DELETE -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/$es_index?pretty"
 done
 ```
 
