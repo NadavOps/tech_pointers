@@ -11,6 +11,9 @@ kubectl get secret <secret_name> --template={{.data.password}} | base64 -d | pbc
 
 # logs
 kubectl logs --timestamps --tail 200 -f <pod_name> --> adding timestamps, listens on stdout, and print last 200 lines
+
+# label node
+kubectl label nodes node_name label_key=label_value
 ```
 
 ## Links
