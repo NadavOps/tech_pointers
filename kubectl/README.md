@@ -14,9 +14,15 @@ kubectl logs --timestamps --tail 200 -f <pod_name> --> adding timestamps, listen
 
 # label node
 kubectl label nodes node_name label_key=label_value
+
+# External metric API
+kubectl get --raw /apis/external.metrics.k8s.io/v1beta1 | jq . | grep -i -A 20 <metric_name>
+kubectl get --raw /apis/external.metrics.k8s.io/v1beta1/namespaces/default/<metric_name>
+kubectl get --raw /apis/external.metrics.k8s.io/v1beta1/namespaces/default/pods/*/<metric_name>
 ```
 
 ## Links
 
 * [Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/).
 * [Commands](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
+* [Debugging cert manager](https://hackmd.io/@maelvls/debug-cert-manager-webhook)

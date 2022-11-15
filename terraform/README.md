@@ -31,3 +31,5 @@ Can be tested with terraform console -> lookup(var.variablename)
 
 ## Links
 * [Set multiple ssh keys for multiple github accounts](https://gist.github.com/jexchan/2351996).
+* [Terraform best practices](https://www.contino.io/insights/terraform-best-practices)
+* [Make docs for Terraform modules](https://medium.com/google-cloud/automate-terraform-documentation-like-a-pro-ed3e19998808)

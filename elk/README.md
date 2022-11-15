@@ -272,6 +272,11 @@ w - warm node
 * [Elasticsearch cheat sheet by logzio](https://logz.io/blog/elasticsearch-cheat-sheet/).
 * [Elasticsearch threadpool by opster](https://opster.com/guides/elasticsearch/glossary/elasticsearch-threadpool/).
 * [Elasticsearch threadpool by opster2](https://opster.com/guides/elasticsearch/glossary/elasticsearch-queue/).
+* [Shard Rebalancing tutorial](https://linuxhint.com/elasticsearch-shard-rebalancing-tutorial/)
+* [ELK troubleshooting workshop](https://github.com/LisaHJung/Part-6-Troubleshooting-beginner-level-Elasticsearch-Errors/blob/main/README.md)
+* Elasticsearch on K8s
+  * https://coralogix.com/blog/running-elk-on-kubernetes-with-eck-part-2/
+  * https://bluexp.netapp.com/blog/cvo-blg-elasticsearch-on-kubernetes-diy-vs.-elasticsearch-operator
 
 * [Queue debugging in options by elastic developer in a forum](https://discuss.elastic.co/t/rejected-execution-queue-capacity-1000/89954).
 
@@ -280,6 +285,8 @@ w - warm node
 
 * [Slow log explanation](https://www.elastic.co/blog/advanced-tuning-finding-and-fixing-slow-elasticsearch-queries)
 
+* [Security automation suggestion](https://github.com/elastic/helm-charts/blob/main/elasticsearch/examples/security/Makefile)
+
 # Capacity Planing Links
 ## not good filtering yet
 * [More links in answer](https://stackoverflow.com/questions/53214628/elasticsearch-how-does-sharding-affect-indexing-performance/53216210#53216210)
@@ -287,6 +294,7 @@ w - warm node
 * [sizing shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/size-your-shards.html)
 * [sizing shards](https://www.elastic.co/blog/benchmarking-and-sizing-your-elasticsearch-cluster-for-logs-and-metrics)
 * [optimize storage efficiency webinar](https://www.elastic.co/webinars/optimizing-storage-efficiency-in-elasticsearch)
+* [design elasticsearch for perfection](https://thoughts.t37.net/designing-the-perfect-elasticsearch-cluster-the-almost-definitive-guide-e614eabc1a87)
 
 More cores > slightly faster clock speed
 increasing number of shards for read, less for write

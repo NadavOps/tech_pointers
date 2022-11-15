@@ -117,6 +117,11 @@ $GITHUB_CONTEXT -> context of the run
   * [gpg](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key?platform=mac)
   * [set noreply email](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address)
   * [ssh signing](https://dev.to/li/correctly-telling-git-about-your-ssh-key-for-signing-commits-4c2c)
+* OIDC solution for github runner and AWS
+  * [Explanation](https://www.jerrychang.ca/writing/security-harden-github-actions-deployments-to-aws-with-oidc)
+  * [assuming a role using a role behind API gateway](https://github.com/glassechidna/ghaoidc)
+* [Awsome runner solutions](https://github.com/jonico/awesome-runners)
+  * [Most used](https://github.com/actions-runner-controller/actions-runner-controller)
 
 composite actions:
 https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions

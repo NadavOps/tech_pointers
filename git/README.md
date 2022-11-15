@@ -211,6 +211,7 @@ git commit --amend --> to change latest commit
 ## Rebase master to feature branch
 ```
 # based on this https://www.verdantfox.com/blog/view/how-to-git-rebase-mainmaster-onto-your-feature-branch-even-with-merge-conflicts
+# maybe should read this as well https://www.algolia.com/blog/engineering/master-git-rebase/
 git checkout feature_branch  --> go to the feature branch
 git fetch origin             --> syncs main branch with latest changes
 git rebase origin/main       --> rebase the main branch, change to master if required
