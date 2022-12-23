@@ -287,6 +287,9 @@ w - warm node
 
 * [Security automation suggestion](https://github.com/elastic/helm-charts/blob/main/elasticsearch/examples/security/Makefile)
 
+# not good for filtering yet
+* [opster terraform bootstrap script](https://github.com/Opster/opensearch-terraform/blob/main/source/conf_setup.sh)
+
 # Capacity Planing Links
 ## not good filtering yet
 * [More links in answer](https://stackoverflow.com/questions/53214628/elasticsearch-how-does-sharding-affect-indexing-performance/53216210#53216210)
