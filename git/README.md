@@ -18,6 +18,8 @@
   * [Git refs](#git-refs)
   * [Git plumbing tools](#git-plumbing-tools)
 
+* [Basic SSH config](#basic-ssh-config)
+
 * [Examples](#examples)
   * [Changing history](#changing-history)
   * [Rebase master to feature branch](#rebase-master-to-feature-branch)
@@ -192,6 +194,14 @@ git filter-repo --path <filename> --invert-paths --> destroys "filename" from al
 cat filename | git hash-object --stdin --> generates a hash from text
 git cat-file <commit_hash> -t --> the type behind the commit_hash
 git cat-file <commit_hash> -p --> prints the value of the commit_hash
+```
+
+## Basic SSH config
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/key_name
 ```
 
 ## Examples
