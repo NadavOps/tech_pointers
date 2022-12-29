@@ -10,8 +10,9 @@
 
 ## Github keys
 ```
-ssh-keygen -t rsa -b 4096
-git config --global user.signingkey ~/.ssh/key_name.pub
+desired_ssh_key_name="input_name_here"
+ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/$desired_ssh_key_name -q -N ""
+git config --global user.signingkey $HOME/.ssh/$desired_ssh_key_name.pub
 git config --global gpg.format ssh
 git config --global commit.gpgsign true
 git config --global tag.gpgsign true
