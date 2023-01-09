@@ -14,8 +14,10 @@ Amazon RDS starts a storage modification for an autoscaling-enabled DB instance 
 # Links
 
 * [EC2 Instances info](https://instances.vantage.sh/).
-* [Aurora workshop](https://awsauroralabsmy.com/provisioned/create/).
 * Graviton links:
     * [docker buildx to support images on both](https://docs.docker.com/build/buildx/install/)
     * [EKS supported images](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#arm-ami)
     * [Adjust kube-proxy](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#updating-kube-proxy-add-on)
+* Workshops:
+    * [AWS well architected](https://www.wellarchitectedlabs.com/)
+    * [Aurora workshop](https://awsauroralabsmy.com/provisioned/create/).
