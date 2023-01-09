@@ -18,6 +18,8 @@
   * [Git refs](#git-refs)
   * [Git plumbing tools](#git-plumbing-tools)
 
+* [Multiple user configuration](#multiple-user-configuration)
+
 * [Basic SSH config](#basic-ssh-config)
 
 * [Examples](#examples)
@@ -194,6 +196,35 @@ git filter-repo --path <filename> --invert-paths --> destroys "filename" from al
 cat filename | git hash-object --stdin --> generates a hash from text
 git cat-file <commit_hash> -t --> the type behind the commit_hash
 git cat-file <commit_hash> -p --> prints the value of the commit_hash
+```
+
+## Multiple user configuration
+* Each config created with the following is representing a user with a specific SSH key, moreover it affects one directory recursively.
+* The global configuration will be an include list for seperate configs each representing a user.
+* With this configuration SSH config is not required.
+```
+# Inputs
+git_username="enter_here"
+git_email="enter_here@users.noreply.github.com"
+git_ssh_key_name="private_key_file_name"
+git_user_folder="repository_path"
+
+# Generate SSH
+ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/$git_ssh_key_name -q -N ""
+
+# Basic config
+git config -f ~/.gitconfig.$git_ssh_key_name user.name "$git_username"
+git config -f ~/.gitconfig.$git_ssh_key_name user.email "$git_email"
+git config -f ~/.gitconfig.$git_ssh_key_name core.sshCommand "ssh -i $HOME/.ssh/$git_ssh_key_name"
+
+# GPG sign config
+git config -f ~/.gitconfig.$git_ssh_key_name user.signingkey $HOME/.ssh/$git_ssh_key_name.pub
+git config -f ~/.gitconfig.$git_ssh_key_name gpg.format ssh
+git config -f ~/.gitconfig.$git_ssh_key_name commit.gpgsign true
+git config -f ~/.gitconfig.$git_ssh_key_name tag.gpgsign true
+
+# Include the config in the main ~/.gitconfig file
+git config --global includeIf.gitdir:$git_user_folder/**.path "~/.gitconfig.$git_ssh_key_name"
 ```
 
 ## Basic SSH config
