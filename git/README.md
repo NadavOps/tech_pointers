@@ -225,6 +225,11 @@ git config -f ~/.gitconfig.$git_ssh_key_name tag.gpgsign true
 
 # Include the config in the main ~/.gitconfig file
 git config --global includeIf.gitdir:$git_user_folder/**.path "~/.gitconfig.$git_ssh_key_name"
+
+# Run the following for the default primary user
+# git config --global user.name "$git_username"
+# git config --global user.email "$git_email"
+# git config --global core.sshCommand "ssh -i $HOME/.ssh/$git_ssh_key_name"
 ```
 
 ## Basic SSH config
