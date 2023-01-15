@@ -60,6 +60,20 @@ curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" \
     -->> list index templates
 ```
 
+Create an index:
+```
+curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/my-index-000001?pretty" -H 'Content-Type: application/json' -d'
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,  
+      "number_of_replicas": 0
+    }
+  }
+}
+'
+```
+
 Get indices amount of primaries and replication factor:
 ```
 for index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]'); do 
