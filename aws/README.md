@@ -18,6 +18,13 @@ Amazon RDS starts a storage modification for an autoscaling-enabled DB instance 
     * [docker buildx to support images on both](https://docs.docker.com/build/buildx/install/)
     * [EKS supported images](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#arm-ami)
     * [Adjust kube-proxy](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#updating-kube-proxy-add-on)
+* Opensearch
+    * [Set SSO APP with AWS SSO](https://geeks.wego.com/integrate-aws-iam-identity-center-sso-saml-with-for-amazon-opensearch-dashboard/)
 * Workshops:
     * [AWS well architected](https://www.wellarchitectedlabs.com/)
     * [Aurora workshop](https://awsauroralabsmy.com/provisioned/create/).
+    * OpenSearch workshops
+        * [Introduction to Amazon Elasticsearch](https://aws-dojo.com/ws43/labs/)
+        * [Welcome to Amazon Elasticsearch Service Workshops](https://aesworkshops.com/)
+        * [Microservice Observability with Amazon OpenSearch Service Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/1abb648b-2ef8-442c-a731-efbcb69c1e1e/en-US)
+        * [SIEM on Amazon OpenSearch Service Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/60a6ee4e-e32d-42f5-bd9b-4a2f7c135a72/en-US)
