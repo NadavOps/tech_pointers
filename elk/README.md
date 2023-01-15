@@ -75,6 +75,17 @@ curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQD
 '
 ```
 
+Get the sum of indices in megabytes:
+```
+for index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]'); do
+  index_size_in_bytes=$(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/$index/_stats" | jq -r '.indices."'$index'".total.store.size_in_bytes')
+  index_size_in_kb=$(( $index_size_in_bytes/1000 ))
+  index_size_in_mb=$(( $index_size_in_kb/1000 ))
+  sum=$(( $sum+$index_size_in_mb ))
+done
+echo $sum
+```
+
 Get indices amount of primaries and replication factor:
 ```
 for index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]'); do 
