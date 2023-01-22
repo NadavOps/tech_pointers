@@ -4,6 +4,7 @@
 * [Process commands](#process-commands)
 * [Search directories](#search-directories)
   * [Get highest disk space direcotories](#get-highest-disk-space-direcotories)
+  * [Search and delete](#search-and-delete)
 * [Substrings](#substrings)
 * [Regular expressions](#regular-expressions)
 * [References](#references)
@@ -18,7 +19,6 @@ echo $process_full_command
 ```
 
 ## Search directories
-
 ```
 find . \
      -path "./.config/dir1" -prune -o \
@@ -35,7 +35,6 @@ find /path -type f -exec chmod 640 {} \;
 ```
 
 ## Get highest disk space direcotories
-
 ```
 # Taken from https://unix.stackexchange.com/questions/125429/tracking-down-where-disk-space-has-gone-on-linux
 du -Pshx /* 2>/dev/null
@@ -44,6 +43,11 @@ du -Pshx /* 2>/dev/null
 -h --> prints in scale units (GB, MB, ...)
 -x --> searches on one filesystem
 -P --> dont follow symlinks to avoid duplication
+```
+
+## Search and delete
+```
+find . -depth 1 -type f -not -name '*.ext' -delete
 ```
 
 ## Substrings
