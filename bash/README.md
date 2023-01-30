@@ -1,6 +1,7 @@
 # Bash
 
 ### Table of Content
+* [Basic commands](#basic-commands)
 * [Process commands](#process-commands)
 * [Search directories](#search-directories)
   * [Get highest disk space direcotories](#get-highest-disk-space-direcotories)
@@ -9,6 +10,11 @@
 * [Regular expressions](#regular-expressions)
 * [References](#references)
 * [Links](#links)
+
+## Basic commands
+```
+cp -a -> recursive and symlink preservation
+```
 
 ## Process commands
 
