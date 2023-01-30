@@ -115,6 +115,15 @@ for es_index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "
 done
 ```
 
+Bulk open closed indices:
+```
+for es_index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cluster/state/blocks?pretty" \
+  | jq -r ".blocks.indices" | jq -r 'keys[]'); do
+  echo $es_index
+  curl -X POST -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/$es_index/_open?pretty"
+done
+```
+
 Bulk indices delete:
 ```
 for es_index in $(curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_aliases" | jq -r 'keys[]' | grep -v -e "^[.].*"); do
@@ -151,6 +160,11 @@ curl -XPOST -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQ
 curl -X PUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cluster/settings" \
   -H 'Content-Type: application/json' \
   -d'{"transient": {"cluster.routing.allocation.cluster_concurrent_rebalance": 2}}'
+
+# Increase allowed number of shards per node (default is 1000)
+curl -X PUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cluster/settings" \
+  -H 'Content-Type: application/json' \
+  -d '{ "persistent": { "cluster.max_shards_per_node": "1500" } }'
 ```
 
 ## Snapshots Repositories and Restore
