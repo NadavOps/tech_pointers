@@ -28,3 +28,4 @@ Amazon RDS starts a storage modification for an autoscaling-enabled DB instance 
         * [Welcome to Amazon Elasticsearch Service Workshops](https://aesworkshops.com/)
         * [Microservice Observability with Amazon OpenSearch Service Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/1abb648b-2ef8-442c-a731-efbcb69c1e1e/en-US)
         * [SIEM on Amazon OpenSearch Service Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/60a6ee4e-e32d-42f5-bd9b-4a2f7c135a72/en-US)
+* [AWS cli example with built in query](https://www.commandlinefu.com/commands/view/13122/use-aws-cli-and-jq-to-get-a-list-of-instances-sorted-by-launch-time)
