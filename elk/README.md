@@ -9,6 +9,7 @@
     * [Repositories APIs](#repositories-apis)
     * [Snapshot APIs](#snapshot-apis)
     * [Recovery APIs](#recovery-apis)
+  * [Miscellaneous APIs](#miscellaneous-apis)
 * [Elasticsearch Operations](#elasticsearch-operations)
   * [Rolling restart](#rolling-restart)
   * [Basic security configuration](#basic-security-configuration)
@@ -209,6 +210,12 @@ curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQD
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cat/recovery"
 ```
 
+## Miscellaneous APIs
+```
+curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_cluster/settings" \
+  -H 'Content-Type: application/json' \
+  -d'{"transient": {"search.max_buckets": "65536"}}'
+```
 
 ## Elasticsearch Operations
 ## Rolling restart
@@ -335,6 +342,9 @@ w - warm node
 
 * [Security automation suggestion](https://github.com/elastic/helm-charts/blob/main/elasticsearch/examples/security/Makefile)
 
+# random links not in the README
+* [find open shards](https://discuss.elastic.co/t/how-to-get-current-open-shards/197528)
+
 # not good for filtering yet
 * [opster terraform bootstrap script](https://github.com/Opster/opensearch-terraform/blob/main/source/conf_setup.sh)
 
@@ -346,8 +356,12 @@ w - warm node
 * [sizing shards](https://www.elastic.co/blog/benchmarking-and-sizing-your-elasticsearch-cluster-for-logs-and-metrics)
 * [optimize storage efficiency webinar](https://www.elastic.co/webinars/optimizing-storage-efficiency-in-elasticsearch)
 * [design elasticsearch for perfection](https://thoughts.t37.net/designing-the-perfect-elasticsearch-cluster-the-almost-definitive-guide-e614eabc1a87)
+* [opensearch troubleshooting and capacity somewhat](https://aws.amazon.com/premiumsupport/knowledge-center/opensearch-red-yellow-status/)
 
 More cores > slightly faster clock speed
 increasing number of shards for read, less for write
 try to evenly spread shards accros nodes
 20 shards per 1GB of heap (600 in our case), true to elastic prio 8.3
+
+# random info
+* 4294967296 max docs (max lucene docs for index 2^32-1)
