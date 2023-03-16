@@ -15,6 +15,7 @@
   * [Git stash](#git-stash)
   * [Git remote](#git-remote)
   * [Git rebase](#git-rebase)
+  * [Git cherry-pick](#git-cherry-pick)
   * [Git refs](#git-refs)
   * [Git plumbing tools](#git-plumbing-tools)
 
@@ -183,6 +184,12 @@ git reflog HEAD --> shows history of the HEAD pointer over the commits
 git reflog refs/heads/master --> shows history of the master pointer over the commits
 git ls-tree
 git ls-remote
+```
+
+## Git cherry-pick
+
+```
+git cherry-pick <commit hash> -> will add a commit on top of the current HEAD
 ```
 
 ## Git plumbing tools
