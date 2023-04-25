@@ -116,6 +116,7 @@ git push --delete origin tag_name                      --> delete remote tag
 git push --delete origin $(git tag -l "some-pattern*") --> delete pattern tags from remote
 git push origin tag_name                               --> push local tag to remote
 git push origin --tags                                 --> push all local tags to remote
+git fetch --prune --prune-tags                         --> delete remote refs that are no longer in use, tags and BRANCHES
 ```
 
 ## Git rm
