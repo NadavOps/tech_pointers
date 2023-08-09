@@ -34,3 +34,4 @@ docker manifest inspect "$private_registry":"$manifest_tag"
 * [Docker context Explanations]
   * [Article 1](https://www.howtogeek.com/devops/how-to-use-multiple-docker-build-contexts-to-streamline-image-assembly/)
   * [Article 1](https://www.docker.com/blog/dockerfiles-now-support-multiple-build-contexts/)
+* [Docker compose general guide](https://gabrieltanner.org/blog/docker-compose/)
