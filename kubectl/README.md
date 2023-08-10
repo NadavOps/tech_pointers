@@ -2,6 +2,7 @@
 
 ### Table of Content
 * [Commands](#commands)
+* [Code Snippets](#code-snippets)
 * [Links](#links)
 
 ## Commands
@@ -19,6 +20,12 @@ kubectl label nodes node_name label_key=label_value
 kubectl get --raw /apis/external.metrics.k8s.io/v1beta1 | jq . | grep -i -A 20 <metric_name>
 kubectl get --raw /apis/external.metrics.k8s.io/v1beta1/namespaces/default/<metric_name>
 kubectl get --raw /apis/external.metrics.k8s.io/v1beta1/namespaces/default/pods/*/<metric_name>
+```
+
+## Code Snippets
+```bash
+namespace_prefix="CHANGE_HERE"
+kubectl get namespaces --no-headers | awk '$1 ~ "^'"$namespace_prefix"'" { print $1 }' | xargs kubectl delete namespace
 ```
 
 ## Links
