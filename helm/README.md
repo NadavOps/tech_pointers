@@ -3,6 +3,7 @@
 ### Table of Content
 * [Commands](#commands)
 * [Examples](#examples)
+* [Code Snippets](#code-snippets)
 * [13 Best Practices for using Helm](#13-best-practices-for-using-helm)
 * [Links](#links)
 
@@ -20,6 +21,17 @@ helm search repo <reponame>/<chartname> --versions     --> show available versio
 {{- if gt $NAME_LENGTH $NAME_MAX_LENGTH -}}
   {{ fail (printf "Value for %s should be less or equal to %d" $NAME_LENGTH $NAME_MAX_LENGTH) }}
 {{- end -}}
+```
+
+## Code Snippets
+```bash
+# Delete releases based on their prefix
+prefix_of_releases_to_delete="CHANGE_HERE"
+json_output=$(helm ls -A --no-headers -f $prefix_of_releases_to_delete --output json)
+
+echo "$json_output" | jq -r '.[] | "\(.namespace) \(.name)"' | while read -r namespace name; do
+    helm uninstall -n$namespace $name
+done
 ```
 
 ## 13 Best Practices for using Helm
