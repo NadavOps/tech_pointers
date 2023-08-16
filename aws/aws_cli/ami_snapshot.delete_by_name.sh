@@ -11,23 +11,27 @@ Usage:
     [-a](AMI name) \\
     [-d](dry run enabled) \\
     [-l](Find public AMI limit) \\
+    [-r](to set a specific regions (\"us-east-1 us-east-2\") else runs for all regions)
     [-h](help)
 """
   }
-  local a d l h o
+  local a d l r h o
   DRY_RUN="false"
-  while getopts "a:dlh" o; do
+  while getopts "a:dlr:h" o; do
     case "$o" in
         h) parse_arguments_help; exit 0;;
         a) AMI_NAME="${OPTARG}";;
         d) DRY_RUN="true";;
         l) LIMIT_FIND_ENABLED="true";;
+        r) REGIONS="${OPTARG}";;
         *) parse_arguments_help; exit 1;;
     esac
   done
 
   echo "WARNING: dry run is set to: $DRY_RUN"
-  REGIONS=$(aws ec2 describe-regions --query "Regions[].RegionName" --output text)
+  if [[ -z "$REGIONS" ]]; then
+    REGIONS=$(aws ec2 describe-regions --query "Regions[].RegionName" --output text)
+  fi
 }
 
 find_service_quota_limit() {
