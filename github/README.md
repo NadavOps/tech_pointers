@@ -2,12 +2,27 @@
 
 ### Table of Content
 * [Github actions](#github-actions)
+  * [Syntax](#syntax)
   * [Rest APIs](#rest-apis)
   * [Workflows](#workflows)
   * [Useful built in env vars](#useful-built-in-env-vars)
 * [Links](#links)
 
 ## Github actions
+## Syntax
+```yml
+- name: Multiline output
+  run: |
+    multiline_output=$(...)
+    echo "## Multiline Output" >> $GITHUB_STEP_SUMMARY
+    echo "$multiline_output" >> $GITHUB_STEP_SUMMARY
+    
+  # Multiline output
+    echo 'multiline_output<<EOF' >> $GITHUB_OUTPUT
+    echo $multiline_output >> $GITHUB_OUTPUT
+    echo 'EOF' >> $GITHUB_OUTPUT
+```
+
 ## Rest APIs
 
 ## Workflows
