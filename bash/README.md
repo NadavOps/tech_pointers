@@ -9,6 +9,7 @@
 * [Substrings](#substrings)
 * [Regular expressions](#regular-expressions)
 * [References](#references)
+* [Utility commands](#utility-commands)
 * [Links](#links)
 
 ## Basic commands
@@ -90,6 +91,16 @@ $@    --> all provided arguments as an array
 $0    --> the running script way to call its filename
 $$    --> the running process PID
 $EUID --> Current userID (root user ID is 0)
+```
+
+## Utility commands
+```bash
+# Get Public IP
+dig +short txt ch whoami.cloudflare @1.0.0.1
+
+# Gen SSH keys
+ssh-keygen -o -t ed25519 -f "$HOME/.ssh/some_key" -C "comment"
+ssh-keygen -o -t rsa -b 4096 -C "email@example.com"
 ```
 
 ## Links
