@@ -15,3 +15,5 @@
 
 ## Links
 * [Checking Kubernetes pod CPU and memory utilization](https://stackoverflow.com/questions/54531646/checking-kubernetes-pod-cpu-and-memory-utilization).
+* [sumo logic observability crash course](https://www.sumologic.com/blog/kubernetes-monitoring/)
+* https://signoz.io/blog/open-source-datadog-alternative/
