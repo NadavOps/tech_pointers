@@ -113,12 +113,15 @@ Amazon RDS starts a storage modification for an autoscaling-enabled DB instance 
 # Links
 
 * [EC2 Instances info](https://instances.vantage.sh/).
+* [AWS marketplace support page](https://aws.amazon.com/marketplace/management/contact-us)
 * Graviton links:
     * [docker buildx to support images on both](https://docs.docker.com/build/buildx/install/)
     * [EKS supported images](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html#arm-ami)
     * [Adjust kube-proxy](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html#updating-kube-proxy-add-on)
 * Opensearch
     * [Set SSO APP with AWS SSO](https://geeks.wego.com/integrate-aws-iam-identity-center-sso-saml-with-for-amazon-opensearch-dashboard/)
+* EKS
+    * [https://www.stacksimplify.com/aws-eks/](https://www.stacksimplify.com/aws-eks/)
 * Workshops:
     * [AWS well architected](https://www.wellarchitectedlabs.com/)
     * [Aurora workshop](https://awsauroralabsmy.com/provisioned/create/).
@@ -128,3 +131,4 @@ Amazon RDS starts a storage modification for an autoscaling-enabled DB instance 
         * [Microservice Observability with Amazon OpenSearch Service Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/1abb648b-2ef8-442c-a731-efbcb69c1e1e/en-US)
         * [SIEM on Amazon OpenSearch Service Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/60a6ee4e-e32d-42f5-bd9b-4a2f7c135a72/en-US)
 * [AWS cli example with built in query](https://www.commandlinefu.com/commands/view/13122/use-aws-cli-and-jq-to-get-a-list-of-instances-sorted-by-launch-time)
+* [Curl aws-sig4](https://curl.se/docs/manpage.html#--aws-sigv4)
