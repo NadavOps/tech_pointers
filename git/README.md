@@ -238,7 +238,11 @@ git config --global "includeIf.gitdir:$git_user_folder/**.path" "~/.gitconfig.$g
 # Run the following for the default primary user
 # git config --global user.name "$git_username"
 # git config --global user.email "$git_email"
+# git config --global user.signingkey "$HOME/.ssh/$git_ssh_key_name.pub"
 # git config --global core.sshCommand "ssh -i $HOME/.ssh/$git_ssh_key_name"
+# git config --global gpg.format ssh
+# git config --global commit.gpgsign true
+# git config --global tag.gpgsign true
 ```
 
 ## Basic SSH config
