@@ -235,7 +235,10 @@ git config -f ~/.gitconfig.$git_config_suffix tag.gpgsign true
 # Include the config in the main ~/.gitconfig file
 git config --global "includeIf.gitdir:$git_user_folder/**.path" "~/.gitconfig.$git_config_suffix"
 
-# Run the following for the default primary user
+# Define the default config for the specific user, should be at the top of the global config $HOME/.gitconfig
+git config --global "includeIf.gitdir:/**.path" "~/.gitconfig.$git_config_suffix"
+
+# Run the following for global configuration -> stronger than the subconfigs
 # git config --global user.name "$git_username"
 # git config --global user.email "$git_email"
 # git config --global user.signingkey "$HOME/.ssh/$git_ssh_key_name.pub"
