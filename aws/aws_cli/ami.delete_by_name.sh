@@ -10,19 +10,17 @@ Usage:
   $script_name \\
     [-a](AMI name) \\
     [-d](dry run enabled) \\
-    [-l](Find public AMI limit) \\
     [-r](to set a specific regions (\"us-east-1 us-east-2\") else runs for all regions)
     [-h](help)
 """
   }
-  local a d l r h o
+  local a d r h o
   DRY_RUN="false"
-  while getopts "a:dlr:h" o; do
+  while getopts "a:dr:h" o; do
     case "$o" in
         h) parse_arguments_help; exit 0;;
         a) AMI_NAME="${OPTARG}";;
         d) DRY_RUN="true";;
-        l) LIMIT_FIND_ENABLED="true";;
         r) REGIONS="${OPTARG}";;
         *) parse_arguments_help; exit 1;;
     esac
@@ -32,28 +30,6 @@ Usage:
   if [[ -z "$REGIONS" ]]; then
     REGIONS=$(aws ec2 describe-regions --query "Regions[].RegionName" --output text)
   fi
-}
-
-find_service_quota_limit() {
-  if [[ "$LIMIT_FIND_ENABLED" == "true" ]]; then
-    echo """INFO: To find other limits here some commands that can help:
-      1. Find your desired service code:
-          aws service-quotas list-aws-default-service-quotas --service-code ec2 | jq -r ".Quotas"
-      2. Find your desired quota code for service code
-          aws service-quotas list-aws-default-service-quotas --service-code ec2
-      3. Find your quota limit
-          aws service-quotas get-service-quota --service-code ec2 --quota-code "L-0E3CBAB9"
-      """
-    for region in $REGIONS; do
-      echo "INFO: Region $region"
-      echo "INFO: public amis current limit"
-      aws service-quotas get-service-quota --service-code ec2 --quota-code "L-0E3CBAB9" --region "$region" --output json | jq -r ".Quota.Value"
-      echo "INFO: Current amount of public amis"
-      # echo aws ec2 describe-images --filters "Name=is-public,Values=true" --region "$region" --query 'length(Images[])'
-      # aws ec2 describe-images --owners self amazon --filters "Name=is-public,Values=true" --region <your-region> --output text | wc -l
-      echo "====="
-    done
-  fi          
 }
 
 find_delete_amis_and_snapshots() {
@@ -93,5 +69,4 @@ find_delete_amis_and_snapshots() {
 }
 
 parse_arguments "$@"
-find_service_quota_limit
 find_delete_amis_and_snapshots
