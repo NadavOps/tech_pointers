@@ -1,9 +1,15 @@
 # AWS
 
 # Table of Content
+* [EC2](#ec2)
 * [RDS](#rds)
 * [Amazon QuickSight](#amazon-quickSight)
 * [Links](#links)
+
+# EC2
+## Files
+/var/log/cloud-init-output.log
+/var/lib/cloud/instance/scripts
 
 # RDS
 ## Storage scaling conditions
