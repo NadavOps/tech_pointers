@@ -124,9 +124,10 @@ git rm -f
 ```bash
 # taken from https://stackoverflow.com/questions/2845731/how-to-uncommit-my-last-commit-in-git
 # the ^ character means the commit before, in our case the commit before the HEAD (can use hash commit instead)
-git reset --soft HEAD^  -> uncommit
-git reset HEAD^ -> Unstage
-git reset --hard HEAD^ -> destroy work done
+git reset --soft HEAD^           -> uncommit
+git reset HEAD^                  -> Unstage
+git reset --hard HEAD^           -> destroy work done
+git reset --hard origin/main     -> destroy work done, will point to the remote HEAD
 git checkout HEAD -- <file_name> -> destroys work done on a specific file (hard reset)
 
 # taken from https://stackoverflow.com/questions/7099833/how-to-revert-a-merge-commit-thats-already-pushed-to-remote-branch
