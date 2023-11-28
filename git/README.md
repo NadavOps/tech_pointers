@@ -26,6 +26,7 @@
 * [Examples](#examples)
   * [Changing history](#changing-history)
   * [Rebase master to feature branch](#rebase-master-to-feature-branch)
+  * [Rebase upstream for PR](#rebase-upstream-for-pr)
 
 * [Links](#links)
 
@@ -154,10 +155,10 @@ git stash clear
 ## Git remote
 ```bash
 git remote set-url origin new.git.url/here     --> set the remote origin URL
-git remote add origin <GitHub repo link>       --> linking the initialized git working directory with the repo in GitHub 
-git remote set-url origin <GitHub repo link>   --> change the repo link 
-git remote rm origin                           --> remove the current link 
-git remote -v                                  --> lists the remotes 
+git remote add origin <GitHub repo link>       --> linking the initialized git working directory with the repo in GitHub
+git remote set-url origin <GitHub repo link>   --> change the repo link
+git remote rm origin                           --> remove the current link
+git remote -v                                  --> lists the remotes
 ```
 
 ## Git rebase
@@ -269,6 +270,15 @@ git add                      --> add file
 git rebase --continue        --> continue with rebase
 git rebase --skip            --> continue like this if git complains no changes were done after resolving conflict
 git push                     --> push changes, force if needed
+```
+
+## Rebase upstream for PR
+```bash
+git remote -v
+git remote add upstream upstream ssh_or_https_URL
+git fetch upstream master
+git rebase upstream/master
+git push -f / git push origin master --force
 ```
 
 
