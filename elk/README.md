@@ -65,9 +65,12 @@ curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQD
 curl -XGET -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" \
     "$ELASTICSEARCH_FQDN:9200/_index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream"
     -->> list index templates
+
 curl -XPUT -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_index_template/template_logical_name" \
   -H 'Content-Type: application/json' \
   -d'{"index_patterns": ["actual_index_pattern_*"], "template": {"settings": {"number_of_shards": 1, "number_of_replicas": 0}}}'
+
+curl -XDELETE -s -u "$ELASTICSEARCH_USER":"$ELASTICSEARCH_PASS" "$ELASTICSEARCH_FQDN:9200/_index_template/my-index-template?pretty"
 ```
 
 Create an index:
