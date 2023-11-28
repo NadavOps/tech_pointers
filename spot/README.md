@@ -7,6 +7,17 @@
 
 ## Commands
 ```bash
+##
+SPOT_TOKEN="change_here"
+SPOT_ACCOUNT_ID="change_here"
+
+curl -XGET -H "Authorization: bearer $SPOT_TOKEN" \
+     "https://api.spotinst.io/aws/ec2/group?accountId=$SPOT_ACCOUNT_ID"
+
+curl -XGET -H "Authorization: bearer $SPOT_TOKEN" \
+     "https://api.spotinst.io/setup/account"
+
+
 
 ```
 
