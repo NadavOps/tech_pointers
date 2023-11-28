@@ -11,23 +11,31 @@
 ## Github actions
 ## Syntax
 ```yml
+# Multiline output
 - name: Multiline output
   run: |
     multiline_output=$(...)
     echo "## Multiline Output" >> $GITHUB_STEP_SUMMARY
     echo "$multiline_output" >> $GITHUB_STEP_SUMMARY
     
-  # Multiline output
+  
     echo 'multiline_output<<EOF' >> $GITHUB_OUTPUT
     echo $multiline_output >> $GITHUB_OUTPUT
     echo 'EOF' >> $GITHUB_OUTPUT
+
+# if statement
+jobs:
+  job_name:
+    runs-on: ubuntu
+    needs: [job_name2]
+    if: ${{ always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
 ```
 
 ## Rest APIs
 
 ## Workflows
 
-```
+```bash
 # Get OIDC JWT token to output for debugging purposes
       - name: Dump JWT
         run: |
@@ -41,10 +49,9 @@
           }
           jwtd $IDTOKEN
           echo "::set-output name=idToken::${IDTOKEN}"
-```
 
-Delete Workflows or just the logs
-```
+
+
 ## Set params
 gh_owner_name=""
 gh_repo_name=""
@@ -76,9 +83,23 @@ for workflow_id in $(curl -s \
       -H "Authorization: Bearer $gh_token" \
       https://api.github.com/repos/$gh_owner_name/$gh_repo_name/actions/runs/$workflow_id
 done
+
+## Delete workflows runs with some filtering
+TODAY=$(date -u +'%Y-%m-%dT00:00:00Z')
+for workflow_id in $(curl -s \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $gh_token" \
+  "https://api.github.com/repos/$gh_owner_name/$gh_repo_name/actions/runs?per_page=100&branch="your_branch_name"&actor=your_user_name" | jq --arg today "$TODAY" '.workflow_runs[] | select(.created_at >= $today) | .id'); do
+    echo "$workflow_id"
+    curl -s \
+      -X DELETE \
+      -H "Accept: application/vnd.github+json" \
+      -H "Authorization: Bearer $gh_token" \
+      https://api.github.com/repos/$gh_owner_name/$gh_repo_name/actions/runs/$workflow_id
+done
 ```
 
-```
+```bash
 ## Dispatch/ trigger a workflow
 gh_owner_name=""
 gh_repo_name=""
