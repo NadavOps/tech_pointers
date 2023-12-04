@@ -14,12 +14,12 @@ for distribution_id in $(echo "${cloudfront_distributions}" | jq -r '.[]'); do
     # Print Lambda function details if associated
     if [ "${viewer_request_function}" != "null" ]; then
         echo "  Viewer Request Lambda Function: ${viewer_request_function}"
-        aws lambda get-function --function-name "$(echo "${viewer_request_function}" | jq -r '.[0]' | cut -d':' -f7)"
+        # aws lambda get-function --function-name "$(echo "${viewer_request_function}" | jq -r '.[0]' | cut -d':' -f7)"
     fi
 
     if [ "${origin_request_function}" != "null" ]; then
         echo "  Origin Request Lambda Function: ${origin_request_function}"
-        aws lambda get-function --function-name "$(echo "${origin_request_function}" | jq -r '.[0]' | cut -d':' -f7)"
+        # aws lambda get-function --function-name "$(echo "${origin_request_function}" | jq -r '.[0]' | cut -d':' -f7)"
     fi
 
     echo "---"
