@@ -275,7 +275,7 @@ git push                     --> push changes, force if needed
 ## Rebase upstream for PR
 ```bash
 git remote -v
-git remote add upstream upstream ssh_or_https_URL
+git remote add upstream ssh_or_https_URL
 git fetch upstream master
 git rebase upstream/master
 git push -f / git push origin master --force
