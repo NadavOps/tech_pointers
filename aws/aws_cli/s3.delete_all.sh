@@ -45,16 +45,7 @@ delete_bucket_or_set_lifecycle_rules_for_deletion () {
     fi
 }
 
-# Get the AWS account ID
-export AWS_ACCESS_KEY_ID="$1"
-export AWS_SECRET_ACCESS_KEY="$2"
-SPECIFIC_BUCKET="${3-}"
-
-if [[ -z "$AWS_ACCESS_KEY_ID" || -z "$AWS_SECRET_ACCESS_KEY" ]]; then
-    echo "ERROR: provide param #1 AWS_ACCESS_KEY_ID ($AWS_ACCESS_KEY_ID), and param #2 AWS_SECRET_ACCESS_KEY ($AWS_SECRET_ACCESS_KEY)"
-    exit 1
-fi
-
+SPECIFIC_BUCKET="${1-}"
 if [[ -z "$SPECIFIC_BUCKET" ]]; then
     echo "ERROR: provide param #3. either a pecific bucket to delete, or the parameter DELETE_ALL_BUCKETS_IN_ACCOUNT"
     exit 1
@@ -62,7 +53,8 @@ fi
 
 echo "INFO: Running as:"
 aws sts get-caller-identity
-echo "INFO: Press enter to continue or ctrl+c to cancel"
+echo """INFO: Press enter to continue or ctrl+c to cancel.
+      You can control the identity using AWS variables such as AWS_PROFILE, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY"
 read
 
 if [[ "$SPECIFIC_BUCKET" == "DELETE_ALL_BUCKETS_IN_ACCOUNT" ]]; then
