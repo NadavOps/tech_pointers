@@ -48,6 +48,12 @@ git config --local user.email "MY_NAME@example.com"
 git config --global alias.co checkout
 ```
 
+## Git status
+```bash
+# show untrackedfiles only
+git status --porcelain --untracked-files=all
+```
+
 ## Git branch
 ```bash
 git branch
