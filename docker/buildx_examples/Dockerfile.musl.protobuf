@@ -1,0 +1,45 @@
+
+
+# Build protobuf from source
+FROM alpine:3.18 AS protobuf_builder
+
+ENV PROTOBUF_VERSION=v25.2
+
+RUN apk add --no-cache \
+    curl \
+    bash \
+    aws-cli \
+    git \
+    make \
+    cmake \
+    gcc \
+    g++ \
+    libc-dev \
+    libffi-dev \
+    openssl-dev
+
+RUN git clone https://github.com/protocolbuffers/protobuf && cd protobuf && git checkout "$PROTOBUF_VERSION" && git submodule update --init
+RUN cd /protobuf/cmake && cmake .
+RUN cd /protobuf/cmake && cmake --build .
+RUN mkdir -p /protoc/bin && \
+    cp $(readlink -f /protobuf/cmake/protoc) /protoc/bin/protoc
+RUN mkdir -p /protoc/include/protobuf/compiler && \
+    cp /protobuf/src/google/protobuf/any.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/api.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/descriptor.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/duration.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/empty.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/field_mask.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/source_context.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/struct.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/timestamp.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/type.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/wrappers.proto /protoc/include/protobuf && \
+    cp /protobuf/src/google/protobuf/compiler/plugin.proto /protoc/include/protobuf/compiler
+
+# Build main image
+FROM amazoncorretto:20.0.2-alpine3.18
+COPY --from=protobuf_builder /protoc/bin/protoc /usr/local/bin/protoc
+COPY --from=protobuf_builder /protoc/include/protobuf /usr/local/include/protobuf
+
+# docker buildx build --load --platform "linux/amd64", "linux/arm64/v8" --progress=plain -f ./Dockerfile.musl.protobuf -t test .

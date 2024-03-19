@@ -1,0 +1,30 @@
+
+# Build async-profiler from source
+FROM amazoncorretto:17-alpine3.18 AS async_profiler_builder
+
+ENV ASYNC_PROFILER_VERSION=v3.0
+
+RUN apk add --no-cache \
+    curl \
+    bash \
+    aws-cli \
+    git \
+    make \
+    cmake \
+    gcc \
+    g++ \
+    libc-dev \
+    libffi-dev \
+    openssl-dev
+
+RUN git clone https://github.com/jvm-profiling-tools/async-profiler && cd async-profiler && git checkout "$ASYNC_PROFILER_VERSION"
+RUN cd async-profiler && make
+RUN mkdir -p /opt/async-profiler && \
+    cp /async-profiler/profiler.sh /opt/async-profiler && \
+    cp -r /async-profiler/build /opt/async-profiler
+
+# Build main image
+FROM amazoncorretto:20.0.2-alpine3.18
+COPY --from=async_profiler_builder /opt/async-profiler /opt/async-profiler
+
+# docker buildx build --load --platform "linux/amd64", "linux/arm64/v8" --progress=plain -f ./Dockerfile.musl.async_profiler -t test .

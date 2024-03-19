@@ -1,0 +1,29 @@
+# Build snappy from source
+FROM amazoncorretto:17-alpine3.18 AS snappy_builder
+
+ENV SNAPPY_VERSION=v1.1.10.5
+
+RUN apk add --no-cache \
+    curl \
+    bash \
+    aws-cli \
+    git \
+    make \
+    cmake \
+    gcc \
+    g++ \
+    libc-dev \
+    libffi-dev \
+    openssl-dev
+
+RUN git clone https://github.com/xerial/snappy-java && cd snappy-java && git checkout "$SNAPPY_VERSION"
+RUN cd snappy-java && make
+RUN cp /snappy-java/src/main/resources/org/xerial/snappy/native/Linux/$(uname -m)/libsnappyjava.so /libsnappyjava.so
+
+# Build main image
+FROM amazoncorretto:20.0.2-alpine3.18
+COPY --from=snappy_builder /libsnappyjava.so /usr/lib/libsnappyjava.so
+
+ENV JAVA_OPTS="-Dorg.xerial.snappy.use.systemlib=true -Dorg.xerial.snappy.lib.path=/usr/lib/libsnappyjava.so"
+
+# docker buildx build --load --platform "linux/amd64", "linux/arm64/v8" --progress=plain -f ./Dockerfile.musl.snappy -t test .
