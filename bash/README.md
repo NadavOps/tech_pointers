@@ -122,3 +122,7 @@ ssh-keygen -o -t rsa -b 4096 -C "email@example.com"
 * [source a file with curl](https://stackoverflow.com/questions/10520605/bashs-source-command-not-working-with-a-file-curld-from-internet)
 * [lima + nerdctl](https://medium.com/@oribenhur/a-better-alternative-for-docker-desktop-3e8fa38d618)
 * [getopts example](https://github.com/actions/runner/blob/main/scripts/create-latest-svc.sh)
+* [nofile](https://www.dbi-services.com/blog/linux-how-to-monitor-the-nofiles-limit/)
+* [tmux](https://hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/)
+* [bashly](https://bashly.dannyb.co/demo/)
+* [systemd](https://silentlad.com/systemd-timers-oncalendar-(cron)-format-explained)
