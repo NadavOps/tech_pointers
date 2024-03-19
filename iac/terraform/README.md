@@ -1,7 +1,7 @@
 # Terraform
 
 ### Table of Content
-* [Terraform commands](#git-commands)
+* [Terraform commands](#terraform-commands)
 
 * [Links](#links)
 
