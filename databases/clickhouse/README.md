@@ -5,11 +5,11 @@
 * [Links](#links)
 
 ## Commands
-```
+```bash
 # show table structure
 SHOW CREATE TABLE your_database_name.your_table_name;
 
-# Get big tables
+# Get big tables #1
 SELECT table,
     formatReadableSize(sum(bytes)) as size,
     min(min_date) as min_date,
@@ -17,6 +17,26 @@ SELECT table,
     FROM system.parts
     WHERE active
     GROUP BY table;
+
+# Get big tables #2
+SELECT 
+    database,
+    table,
+    sum(bytes) AS total_bytes,
+    formatReadableSize(total_bytes) AS total_size
+FROM 
+(
+    SELECT 
+        database,
+        table,
+        sum(bytes_on_disk) AS bytes
+    FROM system.parts
+    WHERE active
+    GROUP BY database, table
+) AS table_sizes
+GROUP BY database, table
+ORDER BY total_bytes DESC;
+
 
 # Mutations (processes?)
 select * from system.mutations where not is_done;
