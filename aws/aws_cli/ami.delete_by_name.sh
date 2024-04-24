@@ -9,18 +9,23 @@ Usage:
   Find/ Delete AMIs and their snapshots + find public AMI current hard limit quota
   $script_name \\
     [-a](AMI name/s) \\
+    [-t](Supply key,value to filter AMIs)
     [-s](number of latest images to save) \\
     [-d](dry run enabled) \\
     [-r](to set a specific regions (\"us-east-1 us-east-2\") else runs for all regions)
     [-h](help)
+Example:
+  * ami.delete_by_name.sh -a ami_name
+  * ami.delete_by_name.sh -t key=value
 """
   }
   local a s d r h o
   DRY_RUN="false"
-  while getopts "a:s:dr:h" o; do
+  while getopts "a:t:s:dr:h" o; do
     case "$o" in
         h) parse_arguments_help; exit 0;;
         a) AMI_NAME="${OPTARG}";;
+        t) TAG_DETAILS="${OPTARG}";;
         s) SAVE_X_IMAGE="${OPTARG}";;
         d) DRY_RUN="true";;
         r) REGIONS="${OPTARG}";;
@@ -38,16 +43,30 @@ Usage:
 }
 
 find_delete_amis_and_snapshots() {
-  if [[ -z "$AMI_NAME" ]]; then
-    echo "ERROR: ami name was not supplied"
+  local tag_key tag_value
+  if [[ -n "$AMI_NAME" ]]; then
+    filters="Name=name,Values=$AMI_NAME"
+  elif [[ -n "$TAG_DETAILS" ]]; then
+    if [[ ! "$TAG_DETAILS" =~ "=" ]]; then
+      parse_arguments_help
+      echo "ERROR: TAG_DETAILS: \"$TAG_DETAILS\" were not supplied correctly"
+    fi
+    tag_key=$(echo "$TAG_DETAILS" | cut -d "=" -f1)
+    tag_value=$(echo "$TAG_DETAILS" | cut -d "=" -f2)
+    filters="Name=tag:$tag_key,Values=$tag_value"
+  else
+    parse_arguments_help
+    echo "ERROR: Required params were not supplied"
     exit 1
   fi
+
+  echo "INFO: Filters were set to: \"$filters\""
 
   for region in $REGIONS; do
     echo "INFO: Region: $region"
 
     ami_ids=$(aws ec2 describe-images \
-      --filters "Name=name,Values=$AMI_NAME" \
+      --filters "$filters" \
       --region "$region" \
       --query 'Images | sort_by(@, &CreationDate) | [].{ID: ImageId, Name: Name, CreationDate: CreationDate}')
 
