@@ -32,6 +32,9 @@ json_output=$(helm ls -A --no-headers -f $prefix_of_releases_to_delete --output 
 echo "$json_output" | jq -r '.[] | "\(.namespace) \(.name)"' | while read -r namespace name; do
     helm uninstall -n$namespace $name
 done
+
+## Delete all namespace starting with blah
+kubectl get namespaces --no-headers -o custom-columns=:metadata.name | grep '^blah' | xargs -I {} kubectl delete namespace {}
 ```
 
 ## 13 Best Practices for using Helm
