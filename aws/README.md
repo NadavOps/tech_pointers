@@ -3,8 +3,10 @@
 # Table of Content
 * [EC2](#ec2)
     * [SSM](#ssm)
+    * [ACM](#acm)
 * [RDS](#rds)
 * [Amazon QuickSight](#amazon-quickSight)
+* [Cloudformation Examples](#cloudformation-examples)
 * [Links](#links)
 
 # EC2
@@ -24,6 +26,13 @@ aws ssm start-session \
     --document-name 'AWS-StartNonInteractiveCommand' \
     --parameters '{"command": ["sudo dnf install -y curl"]}' \
     --target your_instance_id
+```
+
+## ACM
+```bash
+aws acm request-certificate \
+    --domain-name "example.del.me" \
+    --certificate-authority-arn "arn:aws:acm-pca:region:account_id:certificate-authority/ca_id"
 ```
 
 # RDS
@@ -129,6 +138,26 @@ Amazon RDS starts a storage modification for an autoscaling-enabled DB instance 
     }
     // Policy
     Whatever policy u want to allow to the service, for example managed policy `AWSQuicksightAthenaAccess`
+```
+
+# Cloudformation Examples
+```yaml
+# Attach an inline policy to an existing role
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyExistingRolePolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: MyPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:ListAllMyBuckets
+            Resource: '*'
+      Roles:
+        - Role_name
 ```
 
 # Links

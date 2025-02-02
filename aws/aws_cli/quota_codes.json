@@ -1,0 +1,8 @@
+{
+    "managed_policies_per_role_code": {
+        "service_code": "iam",
+        "quota_code": "L-0DA4ABF3",
+        "default_value": "10.0",
+        "desired_value": "20.0"
+    }
+}
