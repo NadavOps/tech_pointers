@@ -10,6 +10,8 @@ mongo_user="mongo"
 mongo_pass="pass"
 connection_string="127.0.0.1:27017"
 
+mongosh mongodb://$mongo_user:$mongo_pass@$connection_string/?directConnection=true
+
 mongosh mongodb://$mongo_user:$mongo_pass@$connection_string --quiet --eval "db.adminCommand('ping')"
 mongosh mongodb://$mongo_user:$mongo_pass@$connection_string --quiet --eval 'rs.initiate()'
 mongosh mongodb://$mongo_user:$mongo_pass@$connection_string --quiet --eval 'rs.status()'
