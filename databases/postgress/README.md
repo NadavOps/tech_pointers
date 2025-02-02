@@ -17,12 +17,12 @@ brew install libpq
 ```bash
 postgress_host="url"
 postgress_user="user_name"
+postgress_pass="password_string"
 postgress_db_name="db_name"
-postgress_pass=password_string
 
 # connect
 psql -h "$postgress_host" -p 5432 -U "$postgress_user" -d "$postgress_db_name"
-PGPASSWORD="$postgress_pass" /usr/local/opt/libpq/bin/psql -h "$postgress_host" -p 5432 -U "$postgress_user"
+PGPASSWORD="$postgress_pass" psql -h "$postgress_host" -p 5432 -U "$postgress_user"
 
 # create user
 PGPASSWORD="$postgress_pass" /usr/local/opt/libpq/bin/createuser -h "$postgress_host" -p 5432 -U "$postgress_user" "$postgress_db_name"
@@ -33,10 +33,10 @@ PGPASSWORD="$postgress_pass" /usr/local/opt/libpq/bin/createdb -h "$postgress_ho
 createdb --username=ADMIN_USER_NAME --host=your_host --port=your_port --owner="$postgress_user" --encoding=UTF8 --template=template0 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 "$postgress_db_name"
 
 # take dump
-PGPASSWORD="$postgress_pass" /usr/local/opt/libpq/bin/pg_dump -h "$postgress_host" -p 5432 -U "$postgress_user" -d "$postgress_db_name" -F c -f /tmp/dump.dump
+PGPASSWORD="$postgress_pass" pg_dump -h "$postgress_host" -p 5432 -U "$postgress_user" -d "$postgress_db_name" -F c -f /tmp/dump.dump
 
 # restore from dump
-PGPASSWORD="$postgress_pass" /usr/local/opt/libpq/bin/pg_restore -h "$postgress_host" -p 5432 -U "$postgress_user" -d "$postgress_db_name" -e /tmp/dump.dump
+PGPASSWORD="$postgress_pass" pg_restore -h "$postgress_host" -p 5432 -U "$postgress_user" -d "$postgress_db_name" -e /tmp/dump.dump
 
 ## Export database
 bash
@@ -80,6 +80,13 @@ WHERE datname = 'db_name';
 
 #
 SELECT pg_size_pretty(pg_database_size('db_name')) AS size;
+
+
+### Wal and replication
+SELECT * FROM pg_stat_replication;
+SELECT * FROM pg_replication_slots;
+SELECT slot_name, active, slot_type, database, plugin FROM pg_replication_slots;
+SELECT pg_drop_replication_slot('slot_name');
 ```
 
 ## Links
