@@ -6,6 +6,7 @@
   * [Rest APIs](#rest-apis)
   * [Workflows](#workflows)
   * [Useful built in env vars](#useful-built-in-env-vars)
+  * [Useful Actions](#useful-actions)
 * [Links](#links)
 
 ## Github actions
@@ -132,6 +133,16 @@ $GITHUB_CONTEXT -> context of the run
           echo context: $GITHUB_CONTEXT
 ```
 
+## Useful Actions
+```yml
+# Allow to SSH into the github runner
+- name: Setup tmate session
+  uses: mxschmitt/action-tmate@v3
+  with:
+    limit-access-to-actor: true
+    timeout-minutes: 15
+```
+
 ## Links
 
 * [Set multiple ssh keys for multiple github accounts](https://gist.github.com/jexchan/2351996).
@@ -148,6 +159,7 @@ $GITHUB_CONTEXT -> context of the run
   * [assuming a role using a role behind API gateway](https://github.com/glassechidna/ghaoidc)
 * [Awsome runner solutions](https://github.com/jonico/awesome-runners)
   * [Most used](https://github.com/actions-runner-controller/actions-runner-controller)
+* [Github runners READMEs- packages on the system](https://github.com/actions/runner-images/tree/main/images).
 
 composite actions:
 https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions

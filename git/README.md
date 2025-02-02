@@ -169,7 +169,8 @@ git remote -v                                  --> lists the remotes
 
 ## Git rebase
 ```bash
-git rebase -i <commit hash>    --> interactive rebase
+git rebase -i <commit hash>                 --> interactive rebase
+git rebase --onto <commit_hash> <ref_name>  --> rebase on a specific commit
 ```
 
 ## Git refs
@@ -212,7 +213,7 @@ git_user_folder="repository_path"
 git_config_suffix="$git_username"
 
 # Generate SSH
-ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/$git_ssh_key_name -q -N ""
+ssh-keygen -t rsa -b 4096 -q -N "" -f "$HOME/.ssh/$git_ssh_key_name" -C "$git_ssh_key_name"
 
 # Basic config
 git config -f ~/.gitconfig.$git_config_suffix user.name "$git_username"
