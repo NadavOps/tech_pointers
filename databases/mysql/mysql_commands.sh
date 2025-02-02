@@ -53,3 +53,27 @@ SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST WHERE COMMAND = "Sleep" AND TIME > 
 #### Other queries
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'table_name'
 Select max(id) from schema_name.table_name
+
+# Dump and restore
+# mysqldump -h $MYSQL_HOST -P $MYSQL_HOST_PORT -u $MYSQL_USER -p$MYSQL_PASS --routines --triggers --events source_schema > source_schema_dump.sql
+mysqldump -h $SOURCE_MYSQL_HOST -P $SOURCE_MYSQL_HOST_PORT -u $SOURCE_MYSQL_USER -p$SOURCE_MYSQL_PASS --set-gtid-purged=OFF $SCHEMA_NAME > $SCHEMA_NAME.dump.sql
+mysql -h $DEST_MYSQL_HOST -P $DEST_MYSQL_HOST_PORT -u $DEST_MYSQL_USER -p$DEST_MYSQL_PASS -e "CREATE DATABASE IF NOT EXISTS $SCHEMA_NAME;"
+mysql -h $DEST_MYSQL_HOST -P $DEST_MYSQL_HOST_PORT -u $DEST_MYSQL_USER -p$DEST_MYSQL_PASS $SCHEMA_NAME < $SCHEMA_NAME.dump.sql
+mysql -h $SOURCE_MYSQL_HOST -P $SOURCE_MYSQL_HOST_PORT -u $SOURCE_MYSQL_USER -p$SOURCE_MYSQL_PASS -e "SHOW DATABASES; USE $SCHEMA_NAME; SHOW TABLES; SHOW PROCEDURE STATUS WHERE Db = '$SCHEMA_NAME'; SHOW TRIGGERS; SHOW EVENTS;"
+mysql -h $DEST_MYSQL_HOST -P $DEST_MYSQL_HOST_PORT -u $DEST_MYSQL_USER -p$DEST_MYSQL_PASS -e "SHOW DATABASES; USE $SCHEMA_NAME; SHOW TABLES; SHOW PROCEDURE STATUS WHERE Db = '$SCHEMA_NAME'; SHOW TRIGGERS; SHOW EVENTS;"
+
+schemas=( "asd" "zxc" )
+for schema in "${schemas[@]}"; do
+    echo "INFO: dumping scehma: $schema from source $SOURCE_MYSQL_HOST"
+    mysqldump -h $SOURCE_MYSQL_HOST -P $SOURCE_MYSQL_HOST_PORT -u $SOURCE_MYSQL_USER -p$SOURCE_MYSQL_PASS --set-gtid-purged=OFF $schema > $schema.dump.sql
+    echo "INFO: Creating scehma: $schema in dest $DEST_MYSQL_HOST"
+    mysql -h $DEST_MYSQL_HOST -P $DEST_MYSQL_HOST_PORT -u $DEST_MYSQL_USER -p$DEST_MYSQL_PASS -e "CREATE DATABASE IF NOT EXISTS $schema;"
+    echo "INFO: Import schema $schema to dest $DEST_MYSQL_HOST"
+    mysql -h $DEST_MYSQL_HOST -P $DEST_MYSQL_HOST_PORT -u $DEST_MYSQL_USER -p$DEST_MYSQL_PASS $schema < $schema.dump.sql
+    echo "INFO: showing database and tables in source"
+    mysql -h $SOURCE_MYSQL_HOST -P $SOURCE_MYSQL_HOST_PORT -u $SOURCE_MYSQL_USER -p$SOURCE_MYSQL_PASS -e "SHOW DATABASES; USE $schema; SHOW TABLES;"
+    echo "INFO: showing database and tables in dest"
+    mysql -h $DEST_MYSQL_HOST -P $DEST_MYSQL_HOST_PORT -u $DEST_MYSQL_USER -p$DEST_MYSQL_PASS -e "SHOW DATABASES; USE $schema; SHOW TABLES;"
+done
+
+
