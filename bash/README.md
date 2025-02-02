@@ -3,6 +3,7 @@
 ### Table of Content
 * [Basic commands](#basic-commands)
 * [Process commands](#process-commands)
+* [Systemctl](#systemctl)
 * [Search directories](#search-directories)
   * [Get highest disk space direcotories](#get-highest-disk-space-direcotories)
   * [Search and delete](#search-and-delete)
@@ -23,6 +24,11 @@ Find process full command. [Taken from here](https://unix.stackexchange.com/ques
 ```
 process_full_command=$(ps -p [PID] -o args)
 echo $process_full_command
+```
+
+## Systemctl
+```bash
+systemctl list-units --type=service --all
 ```
 
 ## Search directories
@@ -101,6 +107,7 @@ dig +short txt ch whoami.cloudflare @1.0.0.1
 # Gen SSH keys
 ssh-keygen -o -t ed25519 -f "$HOME/.ssh/some_key" -C "comment"
 ssh-keygen -o -t rsa -b 4096 -C "email@example.com"
+ssh-keygen -o -t rsa -b 4096 -q -N "" -f "$HOME/.ssh/$git_ssh_key_name" -C "$git_ssh_key_name"
 ```
 
 ## Links
