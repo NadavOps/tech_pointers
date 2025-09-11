@@ -20,11 +20,13 @@
   * [Git plumbing tools](#git-plumbing-tools)
 
 * [Multiple user configuration](#multiple-user-configuration)
+* [Copy git repo](#copy-git-repo)
 
 * [Basic SSH config](#basic-ssh-config)
 
 * [Examples](#examples)
   * [Changing history](#changing-history)
+  * [Copy repository](#copy-repository)
   * [Rebase master to feature branch](#rebase-master-to-feature-branch)
   * [Rebase upstream for PR](#rebase-upstream-for-pr)
 
@@ -213,6 +215,7 @@ git_user_folder="repository_path"
 git_config_suffix="$git_username"
 
 # Generate SSH
+ssh-keygen -t ed25519 -q -N "" -f "$HOME/.ssh/$git_ssh_key_name" -C "$git_ssh_key_name"
 ssh-keygen -t rsa -b 4096 -q -N "" -f "$HOME/.ssh/$git_ssh_key_name" -C "$git_ssh_key_name"
 
 # Basic config
@@ -242,6 +245,15 @@ git config --global "includeIf.gitdir:/**.path" "~/.gitconfig.$git_config_suffix
 # git config --global tag.gpgsign true
 ```
 
+## Copy git repo
+```bash
+git clone --bare https://github.com/source-org/source-repo.git
+cd source-repo.git
+git push --mirror https://github.com/destination-org/destination-repo.git
+cd ..
+rm -rf source-repo.git
+```
+
 ## Basic SSH config
 ```bash
 Host github.com
@@ -263,6 +275,18 @@ change the pick word (:%s/FindMe/ReplaceME/g)
         git commit --amend --author="Author user_name <email_address_include_brackets>"
 
 git commit --amend --> to change latest commit
+```
+
+## Copy repository
+```bash
+git clone source_name_url
+cd source_name
+git remote -v
+git remote remove origin
+git remote add origin destination_name_url
+git remote -v
+git push -u origin --all
+git push --tags
 ```
 
 ## Rebase master to feature branch
