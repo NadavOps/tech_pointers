@@ -14,7 +14,7 @@ aws_profile_picker() {
     read -p "Enter profile number (or press Enter to use the default profile): " profile_number
 
     if [[ -n "$profile_number" ]]; then
-        AWS_PROFILE=$(aws configure list-profiles | sed -n "${profile_number}p")
+        AWS_PROFILE=$(aws configure list-profiles | sort | sed -n "${profile_number}p")
         export AWS_PROFILE
     fi
 
